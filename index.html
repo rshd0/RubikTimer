@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="./style/style.css">
+        <script type="module" src="./scripts/main.js"></script>
+    </head>
+    <body>    
+        <div class="solve-info-wrapper">
+            <div class="solve-info">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="close-icon">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                <div class="solve-id"></div>
+                <div class="solve-time"></div>
+                <div class="solve-date-wrapper">
+                    <div class="solve-date-label">Date</div>
+                    <div class="solve-date"></div>
+                </div>
+                <div class="solve-scramble-wrapper">
+                    <div class="solve-scramble-label">Scramble</div>
+                    <div class="solve-scramble"></div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="wrapper">
+            <div class="dropdown-container">
+                <button class="cube-order-button">3x3</button>
+                <div class="dropdown-cube-order-options_hide dropdown-cube-order-options">
+                    <span class="cube2x2 cube-order-option">2x2</span>
+                    <span class="cube3x3 cube-order-option">3x3</span>
+                </div>
+            </div>
+            <div class="timer_box">
+                <div class="content">
+                    <div class="time">00.000</div>
+                    <div class="buttons">
+                        <button class="dnf-button button">DNF</button>
+                        <button class="remove-button button">Delete</button>
+                        <button class="plus-2 button">+2</button>
+                    </div>
+                    <div class="scramble"></div>
+                </div>
+            </div>
+        </div>
+        <div class="solve-more-info">
+            <div class="solves_table">
+                <div class="solves_header">
+                    <span id="id" class="header_cell">Id</span>
+                    <span id="time" class="header_cell">Time</span>
+                    <span id="ao5" class="header_cell">Ao5</span>
+                    <span class="action_column"></span>
+                </div>
+                <div class="solves_body"></div>
+            </div>
+
+            <div class="solves-stats">
+                <div class="stats-header">
+                    <span class="states-header_action-column"></span>
+                    <span class="stats-header_span">Current</span>
+                    <span class="stats-header_span">Best</span>
+                </div>
+                <div class="stats-body">
+                    <div class="stat-time">
+                        <span class="time-title stat-label">Time</span>
+                        <span class="current  current-time">-</span>
+                        <span class="best best-time">-</span>
+                    </div>
+                    <div class="stat-ao5">
+                        <span class="ao5-title stat-label">Ao5</span>
+                        <span class="current current-ao5">-</span>
+                        <span class="best best-ao5">-</span>
+                    </div>
+                    <div class="stat-ao12">
+                        <span class="ao12-title stat-label">Ao12</span>
+                        <span class="current current-ao12">-</span>
+                        <span class="best best-ao12">-</span>
+                    </div>
+                    <div class="stat-ao25">
+                        <span class="ao25-title stat-label">Ao25</span>
+                        <span class="current current-ao25">-</span>
+                        <span class="best best-ao25">-</span>
+                    </div>
+                    <div class="stat-ao50">
+                        <span class="ao50-title stat-label">Ao50</span>
+                        <span class="current current-ao50">-</span>
+                        <span class="best best-ao50">-</span>
+                    </div>
+                    <div class="stat-ao100">
+                        <span class="ao100-title stat-label">Ao100</span>
+                        <span class="current current-ao100">-</span>
+                        <span class="best best-ao100">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+</body>
+</html>
