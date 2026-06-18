@@ -66,6 +66,8 @@ body{
     max-width: 1280px;
     margin: 0 auto;
     z-index: 2;
+    padding-right: 16px;
+    padding-left: 16px;
 }
 
 .wrapper{
@@ -195,7 +197,9 @@ body{
 
 .solve-more-info{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 5rem;
+    flex-wrap: wrap;
 }
 
 .solves_table {
@@ -216,6 +220,10 @@ body{
     display: flex;
     justify-content: space-between;
     margin-bottom: 0.5rem;
+}
+
+.solves_table, .solves-stats{
+    flex: 1 1 18rem;
 }
 
 .solves_body .solve {
@@ -400,6 +408,9 @@ body{
     
 }
 @media only screen and (max-width: 864px){
+    .time{
+        font-size: 6rem;
+    }
     .scramble{
         font-size: 1.6rem;
     }
