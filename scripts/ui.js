@@ -1,13 +1,14 @@
-import { deleteSolve } from "./storage.js";
+import { deleteSolve, get_settings} from "./storage.js";
 import { updateAverages } from "./averages.js";
 import { scrambleController } from "./scramble.js";
 
 const rubik_scramble = document.querySelector(".scramble");
-const settings = JSON.parse(localStorage.getItem("settings"))
+const settings = get_settings()
 const timeEl = document.querySelector(".time")
 
 export function renderScramble(){
-    let scramble = scrambleController();
+    let cube_order = settings.cube_order
+    let scramble = scrambleController(cube_order);
     rubik_scramble.textContent = scramble;
     return scramble;
 }
@@ -281,8 +282,8 @@ export function updateStates(){
 }
 
 function getAveragesTimeList(){
-    let solves = JSON.parse(localStorage.getItem("3x3")) || [];
-    let averages = JSON.parse(localStorage.getItem("settings"))["averages"];
+    let solves = JSON.parse(localStorage.getItem(settings.cube_order)) || [];
+    let averages = settings["averages"];
     let averages_dict = {};
 
     for (let average of Object.keys(averages)){

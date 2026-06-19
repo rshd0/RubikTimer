@@ -1,7 +1,7 @@
 import {start_timer, stop_timer, is_running} from "./timer.js";
 import { prepareAverages } from "./averages.js";
 import { renderScramble, smoothScrollTo, renderStatsPanel, updateStates, renderSolveTable} from "./ui.js";
-import { saveSolve, deleteSolve } from "./storage.js";
+import { saveSolve, deleteSolve, get_settings} from "./storage.js";
 
 
 let ready_to_start = false;
@@ -10,7 +10,7 @@ let is_cube_order_list_hide = true;
 let scramble, getting_ready;
 
 
-const settings = JSON.parse(localStorage.getItem("settings")) || {};
+const settings = get_settings()
 const timeEl = document.querySelector(".time");
 const rubik_scramble = document.querySelector(".scramble");
 const dnf_button = document.querySelector(".dnf-button");
@@ -33,7 +33,6 @@ document.addEventListener("keydown", function(event){
             localStorage.setItem(settings["cube_order"], JSON.stringify(solves))
             
             let averages = prepareAverages()
-            console.log(averages);
             
                         
             for (let [key, value] of Object.entries(averages)){
@@ -176,11 +175,11 @@ cube3x3.addEventListener("click", function(){
 
 cube_order_button.textContent = settings.cube_order;
 
-if (localStorage.getItem("settings") === null){
-    settings.cube_order = "3x3";
-    settings.averages = {"ao5" : 5, "ao12" : 12, "ao25" : 25, "ao50" : 50, "ao100" : 100}
-    localStorage.setItem("settings", JSON.stringify(settings));
-}
+// if (localStorage.getItem("settings") === null){
+//     settings.cube_order = "3x3";
+//     settings.averages = {"ao5" : 5, "ao12" : 12, "ao25" : 25, "ao50" : 50, "ao100" : 100}
+//     localStorage.setItem("settings", JSON.stringify(settings));
+// }
 
 
 scramble = renderScramble();

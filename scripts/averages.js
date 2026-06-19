@@ -1,4 +1,5 @@
-const settings = JSON.parse(localStorage.getItem("settings"))
+import { get_settings } from "./storage.js";
+const settings = get_settings();
 
 function CalculateAverage(solves, time_count){
     if (!solves || solves.length < time_count){

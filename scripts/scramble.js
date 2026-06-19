@@ -1,11 +1,10 @@
-const settings = JSON.parse(localStorage.getItem("settings"))
 
-export function scrambleController(){
+export function scrambleController(cube_order){
     let scramble;
-    if (settings.cube_order === "3x3"){
+    if (cube_order === "3x3"){
         scramble = generate3x3Scramble();
     }
-    else if(settings.cube_order === "2x2"){
+    else if(cube_order === "2x2"){
         scramble = generate2x2Scramble();
     }
     return scramble;

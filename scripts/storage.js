@@ -35,3 +35,19 @@ export function saveSolve(time, scramble, cubeorder, status){
 
     return data;
 }
+
+export function get_settings(){
+    settings = JSON.parse(localStorage.getItem("settings"));
+    if (settings === null){
+        return set_default_settings();
+    }
+    return settings
+}
+
+function set_default_settings(){
+    settings = {}
+    settings.cube_order = "3x3";
+    settings.averages = {"ao5" : 5, "ao12" : 12, "ao25" : 25, "ao50" : 50, "ao100" : 100}
+    localStorage.setItem("settings", JSON.stringify(settings));
+    return settings;
+}
