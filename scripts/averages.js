@@ -51,9 +51,9 @@ function getTrimCount(time_count){
     }
 }
 
-export function updateAverages(){
+export function updateAverages(settings){
     let solves = JSON.parse(localStorage.getItem(String(settings.cube_order))) || [];
-    let averages = JSON.parse(localStorage.getItem("settings"))["averages"];
+    let averages = settings["averages"];
     let new_average;
     for (let [average, count] of Object.entries(averages)){
         for (let index = 0; index < solves.length; index++){

@@ -27,7 +27,7 @@ document.addEventListener("keydown", function(event){
     if (event.code === "Space"){
         event.preventDefault();
         if (is_running){
-            let settings = JSON.parse(localStorage.getItem("settings"))
+            let settings = get_settings()
             let time = stop_timer();
             let solves = saveSolve(time, scramble, settings["cube_order"], "normal");
             localStorage.setItem(settings["cube_order"], JSON.stringify(solves))
@@ -43,8 +43,8 @@ document.addEventListener("keydown", function(event){
             
             localStorage.setItem(settings.cube_order, JSON.stringify(solves));
                     
-            renderSolveTable();
-            renderStatsPanel(solves);
+            renderSolveTable(settings);
+            renderStatsPanel(solves, settings);
 
             is_key_down = false;
             timeEl.className = "time";
@@ -53,7 +53,7 @@ document.addEventListener("keydown", function(event){
             buttons.forEach(button => button.style.opacity = "1");
             cube_order_button.style.opacity = "1";
 
-            scramble = renderScramble();
+            scramble = renderScramble(settings);
         }
         else{
             if (!is_key_down){
@@ -104,7 +104,7 @@ dnf_button.addEventListener("click", function(){
             solves[solves.length-1].status = "dnf"; 
             localStorage.setItem(settings.cube_order, JSON.stringify(solves));
             
-            updateStates();
+            updateStates(settings);
         }
         
     }
@@ -120,7 +120,7 @@ plus_2.addEventListener("click", function(){
                 solves[solves.length-1].time += 2;
                 solves[solves.length-1].status = "plus2";
                 localStorage.setItem(settings.cube_order, JSON.stringify(solves));
-                updateStates();
+                updateStates(settings);
             }
         }
     }  
@@ -133,7 +133,7 @@ remove_button.addEventListener("click", function(){
         if (solves.length > 0){
             let id = solves[solves.length-1].id;
             deleteSolve(id);
-            updateStates();
+            updateStates(settings);
         }
     }
 })
@@ -159,8 +159,8 @@ cube2x2.addEventListener("click", function(){
     localStorage.setItem("settings", JSON.stringify(settings))
     cube_order_list.classList.replace("dropdown-cube-order-options_show", "dropdown-cube-order-options_hide");
     cube_order_button.textContent = settings.cube_order;
-    updateStates();
-    scramble = renderScramble();
+    updateStates(settings);
+    scramble = renderScramble(settings);
 })
 
 cube3x3.addEventListener("click", function(){
@@ -169,22 +169,15 @@ cube3x3.addEventListener("click", function(){
     localStorage.setItem("settings", JSON.stringify(settings))
     cube_order_list.classList.replace("dropdown-cube-order-options_show", "dropdown-cube-order-options_hide");
     cube_order_button.textContent = settings.cube_order;
-    updateStates()
-    scramble = renderScramble();
+    updateStates(settings)
+    scramble = renderScramble(settings);
 })
 
 cube_order_button.textContent = settings.cube_order;
 
-// if (localStorage.getItem("settings") === null){
-//     settings.cube_order = "3x3";
-//     settings.averages = {"ao5" : 5, "ao12" : 12, "ao25" : 25, "ao50" : 50, "ao100" : 100}
-//     localStorage.setItem("settings", JSON.stringify(settings));
-// }
-
-
-scramble = renderScramble();
-renderSolveTable();
+scramble = renderScramble(settings);
+renderSolveTable(settings);
 
 let solves = JSON.parse(localStorage.getItem(settings.cube_order)) || [];
 
-renderStatsPanel(solves)
+renderStatsPanel(solves, settings)

@@ -3,10 +3,9 @@ import { updateAverages } from "./averages.js";
 import { scrambleController } from "./scramble.js";
 
 const rubik_scramble = document.querySelector(".scramble");
-const settings = get_settings()
 const timeEl = document.querySelector(".time")
 
-export function renderScramble(){
+export function renderScramble(settings){
     let cube_order = settings.cube_order
     let scramble = scrambleController(cube_order);
     rubik_scramble.textContent = scramble;
@@ -35,7 +34,7 @@ export function smoothScrollTo(targetY, duration) {
     requestAnimationFrame(scroll);
 }
 
-export function renderSolveTable(){
+export function renderSolveTable(settings){
     let solves = JSON.parse(localStorage.getItem(settings.cube_order)) || [];
     
     if (solves === null){   
@@ -70,23 +69,23 @@ export function renderSolveTable(){
     }
     time_list_div.innerHTML = html;
 
-    trash()
+    trash(settings)
 
-    info_cord()
+    info_card(settings)
 }
 
-export function trash(){
+export function trash(settings){
     const trash_icons = document.querySelectorAll(".trash_icon");
     trash_icons.forEach(icon => {
         const id = parseInt(icon.dataset.id);
         icon.addEventListener("click", function () {
             deleteSolve(id);
-            updateStates();
+            updateStates(settings);
         });
     });
 }
 
-export function info_cord(){
+function info_card(settings){
     const ids = document.querySelectorAll(".solve_id");
     const times = document.querySelectorAll(".solve_time");
 
@@ -172,17 +171,17 @@ export function formateTime(time, is_running){
     }
 }
 
-export function renderStatsPanel(solves){
+export function renderStatsPanel(solves, settings){
     const current_time_element = document.querySelector(".current-time");
     const best_time_element = document.querySelector(".best-time");    
     let times = []
-    let averages = getAveragesTimeList()
+    let averages = getAveragesTimeList(settings)
 
     solves.forEach(solve => {
         times.push(solve["time"])
     })
 
-    let elements = getAoElements()
+    let elements = getAoElements(settings)
 
     for (let [average, element] of Object.entries(elements)){
         let best = manage_getBests(averages[`ao${average}`]);
@@ -228,8 +227,8 @@ function manage_getBests(solves){
     
 }
 
-function getAoElements(){
-    let averages = JSON.parse(localStorage.getItem("settings"))["averages"]
+function getAoElements(settings){
+    let averages = settings["averages"]
     let averages_list = []
 
     for (let average of Object.values(averages)){
@@ -265,9 +264,9 @@ function findBests(time_list){
     }
 }
 
-export function updateStates(){
-    updateAverages();
-    let solves = JSON.parse(localStorage.getItem(settings.cube_order)) || [];
+export function updateStates(settings){
+    updateAverages(settings);
+    let solves = JSON.parse(localStorage.getItem(settings["cube_order"])) || [];
     
     if (solves.length > 0){
         timeEl.textContent = prepareTime(solves[solves.length-1].time);
@@ -277,12 +276,12 @@ export function updateStates(){
         timeEl.textContent = "00.000"
     }
     
-    renderSolveTable();  
-    renderStatsPanel(solves);
+    renderSolveTable(settings);  
+    renderStatsPanel(solves, settings);
 }
 
-function getAveragesTimeList(){
-    let solves = JSON.parse(localStorage.getItem(settings.cube_order)) || [];
+function getAveragesTimeList(settings){
+    let solves = JSON.parse(localStorage.getItem(String(settings["cube_order"]))) || [];
     let averages = settings["averages"];
     let averages_dict = {};
 
