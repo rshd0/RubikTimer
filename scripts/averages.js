@@ -14,6 +14,9 @@ function CalculateAverage(solves, time_count){
         if (solve.status === "dnf"){
             lasttimes.push(null);
         }
+        else if(solve.status === "plus2"){
+            lasttimes.push(solve.time+2000)
+        }
         else {
             lasttimes.push(solve.time);
         }

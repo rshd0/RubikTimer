@@ -52,7 +52,7 @@ export function renderSolveTable(settings){
             current_time_html = `${prepareTime(solves[index].time)}`;
         }
         else if (solves[index].status === "plus2"){
-            current_time_html = `${prepareTime(solves[index].time)}<sup>+</sup>`;
+            current_time_html = `${prepareTime(apply_plus2(solves[index].time))}<sup>+</sup>`;
         }
         else if (solves[index].status === "dnf"){
             current_time_html = `DNF`;
@@ -143,6 +143,7 @@ export function prepareTime(time){
     return formateTime(time, false)
 }
 
+function apply_plus2(timeMs){ return timeMs + 2000 }
 
 export function formateTime(time, is_running){
     if (is_running === true){
@@ -195,6 +196,9 @@ export function renderStatsPanel(solves, settings){
     if (solves.length >= 1){
         if (solves[solves.length - 1].status === "dnf"){
             current_time = "DNF"
+        }
+        else if(solves[solves.length - 1].status === "plus2"){
+            current_time = times[times.length - 1] + 2000
         }
         else{
             current_time = times[times.length - 1];
@@ -267,13 +271,14 @@ function findBests(time_list){
 export function updateStates(settings){
     updateAverages(settings);
     let solves = JSON.parse(localStorage.getItem(settings["cube_order"])) || [];
-    
+    timeEl.textContent = "00.000"
     if (solves.length > 0){
-        timeEl.textContent = prepareTime(solves[solves.length-1].time);
-    }
-
-    else{
-        timeEl.textContent = "00.000"
+        if (solves[solves.length - 1].status === "plus2"){
+            timeEl.textContent = prepareTime(solves[solves.length-1].time+2000);
+        }
+        else if(solves[solves.length - 1].status === "dnf"){
+            timeEl.textContent = "DNF"
+        }
     }
     
     renderSolveTable(settings);  
