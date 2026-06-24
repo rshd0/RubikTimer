@@ -49,10 +49,11 @@ export function renderSolveTable(settings){
         let current_time_html;
 
         if (solves[index].status === "normal"){
-            current_time_html = `${prepareTime(solves[index].time)}`;
+            current_time_html = `${get_time(solves[index].time)}`;
         }
         else if (solves[index].status === "plus2"){
-            current_time_html = `${prepareTime(apply_plus2(solves[index].time))}<sup>+</sup>`;
+            current_time_html = `${get_time(solves[index].time, "plus2")}<sup>+</sup>`;
+            console.log(current_time_html) 
         }
         else if (solves[index].status === "dnf"){
             current_time_html = `DNF`;
@@ -61,7 +62,7 @@ export function renderSolveTable(settings){
 <div class="solve">
     <span class="solve_cell solve_id" data-id="${solves[index].id}">${solves[index].id}</span>
     <span class="solve_cell solve_time" data-id="${solves[index].id}">${current_time_html}</span>
-    <span class="solve_cell solve_ao5" data-id="${solves[index].id}">${isNaN(solves[index]["averages"]["ao5"]) ? solves[index]["averages"]["ao5"] : prepareTime(solves[index]["averages"]["ao5"])}</span>
+    <span class="solve_cell solve_ao5" data-id="${solves[index].id}">${get_time(solves[index]["averages"]["ao5"])}</span>
     <svg data-id="${solves[index].id}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="trash_icon">
         <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
     </svg>
@@ -188,8 +189,8 @@ export function renderStatsPanel(solves, settings){
         let best = manage_getBests(averages[`ao${average}`]);
         let current = averages[`ao${average}`][averages[`ao${average}`].length - 1];
         
-        element["current"].textContent = isNaN(current) ? current : prepareTime(current);
-        element["best"].textContent = isNaN(best) ? best : prepareTime(best);
+        element["current"].textContent = get_time(current)
+        element["best"].textContent = get_time(best)
     }
 
     let current_time = "-"
@@ -198,7 +199,7 @@ export function renderStatsPanel(solves, settings){
             current_time = "DNF"
         }
         else if(solves[solves.length - 1].status === "plus2"){
-            current_time = times[times.length - 1] + 2000
+            current_time = get_time(times[times.length - 1], "plus2")
         }
         else{
             current_time = times[times.length - 1];
@@ -208,8 +209,8 @@ export function renderStatsPanel(solves, settings){
     
     let best_time = manage_getBests(times)
     
-    current_time_element.textContent = isNaN(current_time) ? current_time : prepareTime(current_time);
-    best_time_element.textContent = isNaN(best_time) ? best_time : prepareTime(best_time);
+    current_time_element.textContent = get_time(current_time)
+    best_time_element.textContent = get_time(best_time)
 }
 
 
@@ -274,10 +275,13 @@ export function updateStates(settings){
     timeEl.textContent = "00.000"
     if (solves.length > 0){
         if (solves[solves.length - 1].status === "plus2"){
-            timeEl.textContent = prepareTime(solves[solves.length-1].time+2000);
+            timeEl.textContent = get_time(solves[solves.length-1].time, "plus2")
         }
         else if(solves[solves.length - 1].status === "dnf"){
             timeEl.textContent = "DNF"
+        }
+        else{
+            timeEl.textContent = get_time(solves[solves.length-1].time)
         }
     }
     
@@ -304,4 +308,12 @@ function getAveragesTimeList(settings){
         averages_dict[average] = average_list;
     }
     return averages_dict;
+}
+
+function get_time(time, status=null){
+    if (status === "plus2" && typeof time === "number"){
+        time += 2000;
+    }
+
+    return (isNaN(time) ? time : prepareTime(time))
 }
