@@ -100,10 +100,9 @@ dnf_button.addEventListener("click", function(){
     let current_time = timeEl.textContent;
     if (current_time !== "00.000"){
         let solves = JSON.parse(localStorage.getItem(settings.cube_order)) || [];
-        if (solves.length > 0 && solves[solves.length - 1].status !== plus_2){
+        if (solves.length > 0){
             solves[solves.length-1].status = "dnf"; 
             localStorage.setItem(settings.cube_order, JSON.stringify(solves));
-            
             updateStates(settings);
         }
         
@@ -116,11 +115,9 @@ plus_2.addEventListener("click", function(){
     if (current_time !== "00.000"){
         let solves = JSON.parse(localStorage.getItem(settings.cube_order)) || [];
         if (solves.length > 0){
-            if (solves[solves.length-1].status !== "dnf"){
-                solves[solves.length-1].status = "plus2";
-                localStorage.setItem(settings.cube_order, JSON.stringify(solves));
-                updateStates(settings);
-            }
+            solves[solves.length-1].status = "plus2";
+            localStorage.setItem(settings.cube_order, JSON.stringify(solves));
+            updateStates(settings);
         }
     }  
 })
