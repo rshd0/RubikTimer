@@ -1,0 +1,31 @@
+:root{
+    --background: #121212;
+    --text: #E0E0E0;
+    --menu-hover-text: #121212;
+    --menu-hover-bg: #E0E0E0;
+    --button-bg: transparent;
+    --remove-button-active-color: #FA1E14;
+    --dnf-button-active-color: #F3C623;
+    --plus2-button-active-color: #fff;
+    --overlay-bgcolor: rgba(0, 0, 0, 0.8);
+    --border-color: #a1a1a1;
+
+    
+    --border-width: 1px;
+    --radius: 0.5rem;
+
+    
+    --font-size-xs: 0.875rem;  
+    --font-size-sm: 1rem;      
+    --font-size-md: 1.25rem;   
+    --font-size-lg: 1.5rem;    
+    --font-size-xl: 2rem;      
+
+    --time-font-size: 8rem;
+    --scramble-font-size: 2rem;
+    --timer-running-font-size: 10rem;
+
+    
+    --transition-fast: 0.15s;
+    --transition-normal: 0.25s;
+}
