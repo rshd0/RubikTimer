@@ -66,7 +66,7 @@ body{
     max-width: 1280px;
     margin: 0 auto;
     z-index: 2;
-    padding: 0 16px;
+    padding: 0 var(--space-md);
 }
 
 .wrapper{
@@ -92,7 +92,7 @@ body{
 }
 
 .cube-order-button{
-    margin: 0.5rem 0;
+    margin: var(--space-xs) 0;
     background-color: var(--button-bg);
     border: none;
     outline: none;
@@ -117,9 +117,9 @@ body{
 
 .cube-order-option{
     display: block;
-    margin-top: 0.2rem;
+    margin-top: var(--space-2xs);
     font-size: var(--font-size-lg);
-    padding: 0.3rem;
+    padding: var(--space-2xs);
     cursor: pointer;
     transition: all var(--transition-fast) ease 20ms;
 }
@@ -143,7 +143,6 @@ body{
 
 .time{
     font-size: var(--time-font-size);
-    margin-bottom: 2.5rem;
     transition: font-size var(--transition-fast) ease-in;
 }
 
@@ -151,7 +150,7 @@ body{
     display: flex;
     justify-content: center;
     gap: 10rem; 
-    margin: 2.5rem 0;   
+    margin: var(--space-2xl) 0;   
 }
 
 .button{
@@ -203,21 +202,20 @@ body{
 .solves_table {
     border: var(--border-width) solid var(--border-color);
     border-radius: var(--radius);
-    padding: 1rem;
+    padding: var(--space-md);
     width: 18rem;
     min-height: 15rem;
     max-height: 25rem;
     overflow-y: auto;
-    margin-bottom: 10rem;
     box-sizing: border-box;
 }
 
 .solves_header {
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid #44403b;
+    padding-bottom: var(--space-md);
+    border-bottom: var(--border-width) solid #44403b;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--space-xs);
 }
 
 .solves_table, .solves-stats{
@@ -227,7 +225,7 @@ body{
 .solves_body .solve {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--space-xs);
 }
 
 .solve:last-child {
@@ -269,7 +267,7 @@ body{
 
 .solves-stats{
     box-sizing: border-box;
-    padding: 1rem;
+    padding: var(--space-md);
     width: 18rem;
     border: var(--border-width) solid var(--border-color);
     border-radius: var(--radius);
@@ -293,13 +291,13 @@ body{
     width: 55px;
 }
 .stats-header{
-    border-bottom: 1px solid #44403b;
-    padding-bottom: 1rem;
-    margin-bottom: 1rem;
+    border-bottom: var(--border-width) solid #44403b;
+    padding-bottom: var(--space-md);
+    margin-bottom: var(--space-md);
 }
 
 .stats-body span{
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--space-xs);
 }
 
 .stats-header_span{
@@ -379,21 +377,21 @@ body{
 }
 
 .solve-id{
-    margin: 1.5rem 0 0.5rem 1rem;
+    margin: var(--space-lg) 0 var(--space-xs) var(--space-md);
 }
 
 .solve-time{
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--space-lg);
     font-size: var(--font-size-xl);
 }
 
 .solve-date-wrapper, .solve-scramble-wrapper{
     display: flex;
     gap: 1.5rem;
-    margin-left: 1rem;
-    margin-bottom: 1rem;
-    margin: 0 1rem 1rem 1rem;
+    margin-left: var(--space-md);
+    margin-bottom: var(--space-md);
+    margin: 0 var(--space-md) var(--space-md) var(--space-md);
 }
 
 .solve-scrmable{
@@ -425,8 +423,8 @@ body{
     .scramble{
         font-size: 1.2rem;
         text-wrap: wrap;
-        margin-right: 1.5rem;
-        margin-left: 1.5rem;
+        margin-right: var(--space-lg);
+        margin-left: var(--space-lg);
     }
     .time{
         font-size: 5.5rem;
