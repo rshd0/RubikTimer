@@ -1,6 +1,8 @@
 :root{
     --background: #121212;
     --text: #E0E0E0;
+    --ready: #0d542b;
+    --waiting: #82181a;
     --menu-hover-text: #121212;
     --menu-hover-bg: #E0E0E0;
     --button-bg: transparent;
@@ -9,6 +11,7 @@
     --plus2-button-active-color: #fff;
     --overlay-bgcolor: rgba(0, 0, 0, 0.8);
     --border-color: #a1a1a1;
+    --table-header-divider-color: #44403b;
 
     
     --border-width: 1px;
@@ -36,4 +39,21 @@
     --space-lg: 1.5rem;     
     --space-xl: 2rem;       
     --space-2xl: 3rem;      
+}
+
+
+
+
+[data-theme="light"]{
+    --background: #E0E0E0;
+    --text: #121212;
+    --menu-hover-text: #E0E0E0;;
+    --menu-hover-bg: #121212;
+    --button-bg: transparent;
+    --remove-button-active-color: #FA1E14;
+    --dnf-button-active-color: #F3C623;
+    --plus2-button-active-color: #fff;
+    --overlay-bgcolor: rgba(0, 0, 0, 0.8);
+    --border-color: #a1a1a1;
+    --table-header-divider-color: #44403b;
 }

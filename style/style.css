@@ -83,6 +83,12 @@ body{
     height: 75vh;
 }
 
+.timer-header{
+    display: flex;
+    justify-content: space-between;
+    padding-top: var(--space-xs);
+}
+
 .dropdown-container{
     position: relative;
     display: flex;
@@ -92,7 +98,6 @@ body{
 }
 
 .cube-order-button{
-    margin: var(--space-xs) 0;
     background-color: var(--button-bg);
     border: none;
     outline: none;
@@ -134,6 +139,45 @@ body{
     border-radius: var(--radius);
 }
 
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.theme-switch .theme-input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    inset: 0;
+    background: rgb(55, 71, 79);
+    border-radius: 34px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.slider::before {
+    content: "";
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    left: 4px;
+    top: 4px;
+    background: linear-gradient(-90deg, #FFD54F 50%, #3B82F6 50%);
+    border-radius: 50%;
+    transition: .3s;
+}
+
+.theme-input:checked + .slider {
+    background: rgb(144, 164, 174);
+}
+
+.theme-input:checked + .slider::before {
+    transform: translateX(26px);
+}
 
 
 
@@ -144,6 +188,23 @@ body{
 .time{
     font-size: var(--time-font-size);
     transition: font-size var(--transition-fast) ease-in;
+}
+
+
+.time[data-state="waiting"] {
+    color: var(--waiting);
+}
+
+.time[data-state="ready"] {
+    color: var(--ready);
+}
+
+.time[data-state="running"] {
+    color: var(--text);
+}
+
+.time[data-state="normal"] {
+    color: var(--text);
 }
 
 .buttons{
@@ -187,10 +248,7 @@ body{
     transition: opacity var(--transition-fast) ease-in;
 }
 
-.in_running{
-    font-size: var(--timer-running-font-size);
-    transition: font-size var(--transition-fast) ease-in;
-}
+
 
 .solve-more-info{
     display: flex;
@@ -291,7 +349,7 @@ body{
     width: 55px;
 }
 .stats-header{
-    border-bottom: var(--border-width) solid #44403b;
+    border-bottom: var(--border-width) solid var(--table-header-divider-color);
     padding-bottom: var(--space-md);
     margin-bottom: var(--space-md);
 }
@@ -409,7 +467,7 @@ body{
     .scramble{
         font-size: 1.6rem;
     }
-    .in_running{
+    .running{
         font-size: 7.5rem;
     }
     .buttons{
@@ -429,7 +487,7 @@ body{
     .time{
         font-size: 5.5rem;
     }
-    .in_running{
+    .running{
         font-size: 6rem;
     }
     .buttons{
@@ -456,7 +514,7 @@ body{
     .time{
         font-size: 4rem;
     }
-    .in_running{
+    .running{
         font-size: 4.8rem;
     }
     .scramble{

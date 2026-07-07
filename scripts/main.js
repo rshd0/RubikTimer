@@ -1,6 +1,6 @@
 import {start_timer, stop_timer, is_running} from "./timer.js";
 import { prepareAverages } from "./averages.js";
-import { renderScramble, smoothScrollTo, renderStatsPanel, updateStates, renderSolveTable} from "./ui.js";
+import { renderScramble, smoothScrollTo, renderStatsPanel, updateStates, renderSolveTable, initUI} from "./ui.js";
 import { saveSolve, deleteSolve, get_settings} from "./storage.js";
 
 
@@ -47,7 +47,7 @@ document.addEventListener("keydown", function(event){
             renderStatsPanel(solves, settings);
 
             is_key_down = false;
-            timeEl.className = "time";
+            timeEl.dataset.state = "normal";
 
             rubik_scramble.style.opacity = "1";
             buttons.forEach(button => button.style.opacity = "1");
@@ -68,9 +68,11 @@ document.addEventListener("keydown", function(event){
                     buttons.forEach(button => button.style.opacity = "0");
                     cube_order_button.style.opacity = "0";
 
-                    timeEl.style.color = "#0d542b";
+                    // timeEl.style.color = "#0d542b";
+                    timeEl.dataset.state = "ready";
                 }, 250)
-                timeEl.style.color = "#82181a";
+                // timeEl.style.color = "#82181a";
+                timeEl.dataset.state = "waiting";
             }
         }
     }}
@@ -82,15 +84,17 @@ document.addEventListener("keyup", function(event){
         if (!ready_to_start){
             clearTimeout(getting_ready);
             document.body.style.overflow = "auto"
-            timeEl.style.color = "#E0E0E0";
+            // timeEl.style.color = "#E0E0E0";
+            timeEl.dataset.state = "normal";
             is_key_down = false;
             return;
         }
         if (ready_to_start && !is_running){
             start_timer();
-            timeEl.className = "in_running";
+            // timeEl.className = "time running";
+            timeEl.dataset.state = "running";
             ready_to_start = false;
-            timeEl.style.color = "#E0E0E0"
+            // timeEl.style.color = "#E0E0E0"
         }
     }
 })
@@ -169,6 +173,7 @@ cube3x3.addEventListener("click", function(){
     scramble = renderScramble(settings);
 })
 
+initUI(settings)
 cube_order_button.textContent = settings.cube_order;
 
 scramble = renderScramble(settings);

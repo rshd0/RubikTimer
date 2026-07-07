@@ -317,3 +317,41 @@ function get_time(time, status=null){
 
     return (isNaN(time) ? time : prepareTime(time))
 }
+
+function set_theme(isLight, settings){
+    let html = document.querySelector("html")
+    console.log(settings)
+    if (isLight){
+        html.dataset.theme = "light" 
+        settings.theme = "light"   
+        localStorage.setItem("settings", JSON.stringify(settings))
+    }else{
+        html.dataset.theme = "dark"
+        settings.theme = "dark"   
+        localStorage.setItem("settings", JSON.stringify(settings))
+    }
+}
+
+export function initUI(settings){
+    const toggle = document.querySelector(".theme-input")
+
+    if (settings && settings.hasOwnProperty("theme")){
+        if (settings.theme === "light"){
+            set_theme(true, settings)
+            toggle.checked = true
+        }else if (settings.theme === "dark"){
+            set_theme(false, settings)
+            toggle.checked = false
+        }
+    }
+
+    toggle.addEventListener("change", () => {
+        
+        if (toggle.checked === true){
+            set_theme(true, settings)
+        }else{
+            set_theme(false, settings)
+        }  
+    })
+}
+

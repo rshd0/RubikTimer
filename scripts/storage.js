@@ -48,6 +48,7 @@ function set_default_settings(){
     settings = {}
     settings.cube_order = "3x3";
     settings.averages = {"ao5" : 5, "ao12" : 12, "ao25" : 25, "ao50" : 50, "ao100" : 100}
+    settings.theme = "dark"
     localStorage.setItem("settings", JSON.stringify(settings));
     return settings;
 }
