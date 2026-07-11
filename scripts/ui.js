@@ -1,9 +1,17 @@
-import { deleteSolve, get_settings} from "./storage.js";
-import { updateAverages } from "./averages.js";
+import { deleteSolve, get_settings, saveSolve } from "./storage.js";
+import { updateAverages, prepareAverages } from "./averages.js";
 import { scrambleController } from "./scramble.js";
+import { is_running, start_timer, stop_timer } from "./timer.js";
 
 const rubik_scramble = document.querySelector(".scramble");
 const timeEl = document.querySelector(".time")
+const buttons = document.querySelectorAll(".button");
+const cube_order_button = document.querySelector(".cube-order-button");
+const slider = document.querySelector(".slider")
+
+let ready_to_start = false;
+let is_key_down = false;
+let getting_ready, scramble;
 
 export function renderScramble(settings){
     let cube_order = settings.cube_order
@@ -53,7 +61,6 @@ export function renderSolveTable(settings){
         }
         else if (solves[index].status === "plus2"){
             current_time_html = `${get_time(solves[index].time, "plus2")}<sup>+</sup>`;
-            console.log(current_time_html) 
         }
         else if (solves[index].status === "dnf"){
             current_time_html = `DNF`;
@@ -320,7 +327,6 @@ function get_time(time, status=null){
 
 function set_theme(isLight, settings){
     let html = document.querySelector("html")
-    console.log(settings)
     if (isLight){
         html.dataset.theme = "light" 
         settings.theme = "light"   
@@ -332,9 +338,11 @@ function set_theme(isLight, settings){
     }
 }
 
-export function initUI(settings){
-    const toggle = document.querySelector(".theme-input")
+function handleThemeToggle(event, toggle, settings){ 
+    set_theme(toggle.checked, settings)
+}
 
+function initializeTheme(settings, toggle){
     if (settings && settings.hasOwnProperty("theme")){
         if (settings.theme === "light"){
             set_theme(true, settings)
@@ -344,14 +352,178 @@ export function initUI(settings){
             toggle.checked = false
         }
     }
-
-    toggle.addEventListener("change", () => {
-        
-        if (toggle.checked === true){
-            set_theme(true, settings)
-        }else{
-            set_theme(false, settings)
-        }  
-    })
 }
 
+function handleRunningTimer(){
+    let settings = get_settings()
+    let time = stop_timer();
+    let solves = saveSolve(time, scramble, settings["cube_order"], "normal");
+    localStorage.setItem(settings["cube_order"], JSON.stringify(solves))
+    
+    let averages = prepareAverages()
+                
+    for (let [key, value] of Object.entries(averages)){
+        averages[key] = isNaN(value) ?  value : Number(value);
+    }
+
+    solves[solves.length - 1]["averages"] = averages
+    
+    localStorage.setItem(settings.cube_order, JSON.stringify(solves));
+            
+    renderSolveTable(settings);
+    renderStatsPanel(solves, settings);
+
+    is_key_down = false;
+    timeEl.dataset.state = "normal";
+
+    rubik_scramble.style.opacity = "1";
+    buttons.forEach(button => button.style.opacity = "1");
+    cube_order_button.style.opacity = "1";
+    slider.style.opacity = "1"
+
+    scramble = renderScramble(settings);
+}
+
+function prepareTimerStart(){
+    if (!is_key_down){
+        is_key_down = true;
+        getting_ready = setTimeout(() => {
+            ready_to_start = true;
+            smoothScrollTo(0, 200);
+            setTimeout(() => {
+                document.body.style.overflow = "hidden";
+            }, 200)
+            rubik_scramble.style.opacity = "0";
+            buttons.forEach(button => button.style.opacity = "0");
+            cube_order_button.style.opacity = "0";
+            slider.style.opacity = "0"
+      
+            timeEl.dataset.state = "ready";
+        }, 250)
+
+        timeEl.dataset.state = "waiting";
+    }
+}
+
+function resetTimerState(){
+    clearTimeout(getting_ready);
+    document.body.style.overflow = "auto"
+    timeEl.dataset.state = "normal";
+    is_key_down = false;
+    return;
+            
+}
+
+function startTimerIfReady(){
+    start_timer();
+    timeEl.dataset.state = "running";
+    ready_to_start = false;        
+}
+
+function handleTimerKeyDown(event){
+    if (event.code === "Space"){
+        event.preventDefault();
+        
+        if (is_running){
+            handleRunningTimer()
+        }
+        else{
+            prepareTimerStart()
+        }
+    }
+}
+
+function handleTimerKeyUp(event){
+    if (event.code === "Space"){
+        event.preventDefault();
+        if (!ready_to_start){
+            resetTimerState()
+            return;
+        }
+        if (!is_running){
+            startTimerIfReady()
+        }
+    }
+}
+
+function dnf_button_handler(settings){
+    let current_time = timeEl.textContent;
+    if (current_time !== "00.000"){
+        let solves = JSON.parse(localStorage.getItem(settings.cube_order)) || [];
+        if (solves.length > 0){
+            solves[solves.length-1].status = "dnf"; 
+            localStorage.setItem(settings.cube_order, JSON.stringify(solves));
+            updateStates(settings);
+        }
+    }
+}
+
+function plus2_button_handler(settings){
+    let current_time = timeEl.textContent
+    if (current_time !== "00.000"){
+        let solves = JSON.parse(localStorage.getItem(settings.cube_order)) || [];
+        if (solves.length > 0){
+            solves[solves.length-1].status = "plus2";
+            localStorage.setItem(settings.cube_order, JSON.stringify(solves));
+            updateStates(settings);
+        }
+    }  
+}
+
+function remove_button_handler(settings){
+    let current_time = timeEl.textContent
+    if (current_time !== "00.000"){
+        let solves = JSON.parse(localStorage.getItem(settings.cube_order));
+        if (solves.length > 0){
+            let id = solves[solves.length-1].id;
+            deleteSolve(id);
+            updateStates(settings);
+        }
+    }
+}
+
+function cube_order_handler(settings, cube_order_list){
+    cube_order_list.classList.toggle("dropdown-cube-order-options_show");
+    cube_order_list.classList.toggle("dropdown-cube-order-options_hide");
+
+    cube_order_button.textContent = settings.cube_order;
+}
+
+function changeCubeOrder(settings, cube_order_list, order){
+    settings.cube_order = order;
+    localStorage.setItem("settings", JSON.stringify(settings))
+    cube_order_list.classList.replace("dropdown-cube-order-options_show", "dropdown-cube-order-options_hide");
+    cube_order_button.textContent = settings.cube_order;
+    updateStates(settings)
+    scramble = renderScramble(settings);
+}
+
+export function initUI(settings){
+    const dnf_button = document.querySelector(".dnf-button");
+    const plus_2 = document.querySelector(".plus-2");
+    const toggle = document.querySelector(".theme-input")  
+    const remove_button = document.querySelector(".remove-button");
+    const cube_order_button = document.querySelector(".cube-order-button");
+    const cube2x2 = document.querySelector(".cube2x2");
+    const cube3x3 = document.querySelector(".cube3x3");
+    const cube_order_list  = document.querySelector(".dropdown-cube-order-options_hide");
+
+    let is_cube_order_list_hide = true;
+    let solves = JSON.parse(localStorage.getItem(settings.cube_order)) || [];
+
+    scramble = renderScramble(settings);
+    initializeTheme(settings, toggle)
+    renderSolveTable(settings);
+    renderStatsPanel(solves, settings)
+    
+    cube_order_button.textContent = settings.cube_order;
+    document.addEventListener("keydown", handleTimerKeyDown)
+    document.addEventListener("keyup", handleTimerKeyUp)
+    toggle.addEventListener("change", event => handleThemeToggle(event, toggle, settings))
+    dnf_button.addEventListener("click", event => dnf_button_handler(settings))
+    plus_2.addEventListener("click", event => plus2_button_handler(settings))
+    remove_button.addEventListener("click", event => remove_button_handler(settings))
+    cube_order_button.addEventListener("click", event => cube_order_handler(settings, cube_order_list))
+    cube2x2.addEventListener("click", event => changeCubeOrder(settings, cube_order_list, "2x2"))
+    cube3x3.addEventListener("click", event => changeCubeOrder(settings, cube_order_list, "3x3"))
+}
