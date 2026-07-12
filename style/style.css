@@ -75,18 +75,22 @@ body{
     height: 100vh;
 }
 
+.timer-title-text{
+    font-size: var(--font-size-lg);
+}
+
 .timer_box{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: 75vh;
+    height: 65vh;
 }
 
 .timer-header{
     display: flex;
     justify-content: space-between;
-    padding-top: var(--space-xs);
+    padding-top: var(--space-md);
 }
 
 .dropdown-container{
@@ -103,6 +107,7 @@ body{
     outline: none;
     color: var(--text);
     font-size: var(--font-size-xl);
+    margin-top: var(--space-md);
     cursor: pointer;
 }
 
@@ -130,7 +135,7 @@ body{
 }
 
 .cube-order-option:first-child{
-    margin-top: 0;
+    margin-top: var(--space-xs);
 }
 
 .cube-order-option:hover{
