@@ -62,6 +62,10 @@ body{
     box-sizing: border-box;
 }
 
+.layout{
+    display: flex;
+}
+
 .container{
     max-width: 1280px;
     margin: 0 auto;
@@ -85,6 +89,90 @@ body{
     justify-content: center;
     flex-direction: column;
     height: 65vh;
+}
+
+.sidebar{
+    width: 17rem;
+    padding: var(--space-xs);
+    border-right: 1px solid #44403b;
+}
+
+
+.sidebar > header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-lg);
+}
+
+.sidebar > header > button > svg{
+    transition: all 0.3s;
+}
+
+.sidebar button{
+    background-color: transparent;
+    color: var(--text);
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+}
+
+.menu-btn > svg{
+    width: 1.5rem;
+}
+
+.sidebar-nav{
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-nav button svg {
+    margin-right: var(--space-xs);
+}
+
+.sidebar button:hover{
+    background-color: #27272a;
+    border-radius: var(--radius);
+}
+
+.sidebar.closed{
+    width: 3rem;
+}
+
+.sidebar.closed .sidebar-nav span{
+    overflow: hidden;
+    opacity: 0;
+    width: 0;
+}
+
+.sidebar.closed .sidebar-nav button svg{
+    margin: 0;
+    width: 1.7;
+}
+
+.sidebar.closed header .menu-btn{
+    display: none;
+}
+
+.sidebar.closed header > svg{
+    width: 2rem;
+}
+
+.sidebar.closed header:hover > svg{
+    display: none;
+}
+
+.sidebar.closed header:hover > svg + .menu-btn{
+    display: block; 
+}
+
+.sidebar.closed header:hover > svg + .menu-btn > svg {
+    width: 1.5rem;
+    transform: rotate(180deg);
+}
+
+.sidebar.closed header{
+    justify-content: center;
 }
 
 .timer-header{

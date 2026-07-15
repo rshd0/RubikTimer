@@ -8,6 +8,7 @@ const timeEl = document.querySelector(".time")
 const buttons = document.querySelectorAll(".button");
 const cube_order_button = document.querySelector(".cube-order-button");
 const slider = document.querySelector(".slider")
+const timer_title = document.querySelector(".timer-title-text");
 
 let ready_to_start = false;
 let is_key_down = false;
@@ -380,6 +381,7 @@ function handleRunningTimer(){
     buttons.forEach(button => button.style.opacity = "1");
     cube_order_button.style.opacity = "1";
     slider.style.opacity = "1"
+    timer_title.style.opacity = "1"
 
     scramble = renderScramble(settings);
 }
@@ -397,6 +399,7 @@ function prepareTimerStart(){
             buttons.forEach(button => button.style.opacity = "0");
             cube_order_button.style.opacity = "0";
             slider.style.opacity = "0"
+            timer_title.style.opacity = "0"
       
             timeEl.dataset.state = "ready";
         }, 250)
@@ -498,6 +501,12 @@ function changeCubeOrder(settings, cube_order_list, order){
     scramble = renderScramble(settings);
 }
 
+function sidebarBtnHandler(){
+    const sidebar = document.querySelector(".sidebar")
+    sidebar.classList.toggle("closed")
+
+}
+
 export function initUI(settings){
     const dnf_button = document.querySelector(".dnf-button");
     const plus_2 = document.querySelector(".plus-2");
@@ -507,6 +516,8 @@ export function initUI(settings){
     const cube2x2 = document.querySelector(".cube2x2");
     const cube3x3 = document.querySelector(".cube3x3");
     const cube_order_list  = document.querySelector(".dropdown-cube-order-options_hide");
+    const sidebar_button = document.querySelector(".menu-btn")
+    
 
     let is_cube_order_list_hide = true;
     let solves = JSON.parse(localStorage.getItem(settings.cube_order)) || [];
@@ -526,4 +537,5 @@ export function initUI(settings){
     cube_order_button.addEventListener("click", event => cube_order_handler(settings, cube_order_list))
     cube2x2.addEventListener("click", event => changeCubeOrder(settings, cube_order_list, "2x2"))
     cube3x3.addEventListener("click", event => changeCubeOrder(settings, cube_order_list, "3x3"))
+    sidebar_button.addEventListener("click", event => sidebarBtnHandler())
 }

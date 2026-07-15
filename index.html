@@ -1,117 +1,160 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <link rel="stylesheet" href="./style/token.css">
-        <link rel="stylesheet" href="./style/style.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-        <script type="module" src="./scripts/main.js"></script>
-    </head>
-    <body>    
-        <div class="solve-info-wrapper">
-            <div class="solve-info">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="close-icon">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                </svg>
-                <div class="solve-id"></div>
-                <div class="solve-time"></div>
-                <div class="solve-date-wrapper">
-                    <div class="solve-date-label">Date</div>
-                    <div class="solve-date"></div>
-                </div>
-                <div class="solve-scramble-wrapper">
-                    <div class="solve-scramble-label">Scramble</div>
-                    <div class="solve-scramble"></div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="wrapper">
-            <header class="timer-header">
-                <div class="timer-title">
-                    <h2 class="timer-title-text">Rubik Timer</h2>
-                </div>
-                <div class="theme-switch-container">
-                    <label class="theme-switch">
-                        <input type="checkbox" class="theme-input">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-            </header>
-            <div class="dropdown-container">
-                <button class="cube-order-button">3x3</button>
-                <div class="dropdown-cube-order-options_hide dropdown-cube-order-options">
-                    <span class="cube2x2 cube-order-option">2x2</span>
-                    <span class="cube3x3 cube-order-option">3x3</span>
-                </div>
-            </div>
-            <div class="timer_box">
-                <div class="content">
-                    <div class="time">00.000</div>
-                    <div class="buttons">
-                        <button class="dnf-button button">DNF</button>
-                        <button class="remove-button button">Delete</button>
-                        <button class="plus-2 button">+2</button>
-                    </div>
-                    <div class="scramble"></div>
-                </div>
-            </div>
-        </div>
-        <div class="solve-more-info">
-            <div class="solves_table">
-                <div class="solves_header">
-                    <span id="id" class="header_cell">Id</span>
-                    <span id="time" class="header_cell">Time</span>
-                    <span id="ao5" class="header_cell">Ao5</span>
-                    <span class="action_column"></span>
-                </div>
-                <div class="solves_body"></div>
-            </div>
 
-            <div class="solves-stats">
-                <div class="stats-header">
-                    <span class="states-header_action-column"></span>
-                    <span class="stats-header_span">Current</span>
-                    <span class="stats-header_span">Best</span>
-                </div>
-                <div class="stats-body">
-                    <div class="stat-time">
-                        <span class="time-title stat-label">Time</span>
-                        <span class="current  current-time">-</span>
-                        <span class="best best-time">-</span>
-                    </div>
-                    <div class="stat-ao5">
-                        <span class="ao5-title stat-label">Ao5</span>
-                        <span class="current current-ao5">-</span>
-                        <span class="best best-ao5">-</span>
-                    </div>
-                    <div class="stat-ao12">
-                        <span class="ao12-title stat-label">Ao12</span>
-                        <span class="current current-ao12">-</span>
-                        <span class="best best-ao12">-</span>
-                    </div>
-                    <div class="stat-ao25">
-                        <span class="ao25-title stat-label">Ao25</span>
-                        <span class="current current-ao25">-</span>
-                        <span class="best best-ao25">-</span>
-                    </div>
-                    <div class="stat-ao50">
-                        <span class="ao50-title stat-label">Ao50</span>
-                        <span class="current current-ao50">-</span>
-                        <span class="best best-ao50">-</span>
-                    </div>
-                    <div class="stat-ao100">
-                        <span class="ao100-title stat-label">Ao100</span>
-                        <span class="current current-ao100">-</span>
-                        <span class="best best-ao100">-</span>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rubik Timer</title>
+    <link rel="stylesheet" href="./style/token.css" />
+    <link rel="stylesheet" href="./style/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+    <script type="module" src="./scripts/main.js"></script>
+</head>
+
+<body>
+    <div class="solve-info-wrapper">
+        <div class="solve-info">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="close-icon">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            <div class="solve-id"></div>
+            <div class="solve-time"></div>
+            <div class="solve-date-wrapper">
+                <div class="solve-date-label">Date</div>
+                <div class="solve-date"></div>
+            </div>
+            <div class="solve-scramble-wrapper">
+                <div class="solve-scramble-label">Scramble</div>
+                <div class="solve-scramble"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layout">
+        <div class="sidebar closed">
+            <header>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M223.68,66.15,135.68,18h0a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32h0l80.34,44L128,120,47.66,76ZM40,90l80,43.78v85.79L40,175.82Zm96,129.57V133.82L216,90v85.78Z"></path>
+                </svg>
+                
+                <button class="menu-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256">
+                        <path d="M205.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L131.31,128ZM51.31,128l74.35-74.34a8,8,0,0,0-11.32-11.32l-80,80a8,8,0,0,0,0,11.32l80,80a8,8,0,0,0,11.32-11.32Z"></path>
+                    </svg>
+                </button>
+            </header>
+            <div class="sidebar-nav">
+                <button class="sidebar-option timer-option">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256">
+                        <path d="M128,40a96,96,0,1,0,96,96A96.11,96.11,0,0,0,128,40Zm0,176a80,80,0,1,1,80-80A80.09,80.09,0,0,1,128,216ZM173.66,90.34a8,8,0,0,1,0,11.32l-40,40a8,8,0,0,1-11.32-11.32l40-40A8,8,0,0,1,173.66,90.34ZM96,16a8,8,0,0,1,8-8h48a8,8,0,0,1,0,16H104A8,8,0,0,1,96,16Z"></path>
+                    </svg>
+                    <span>Timer</span>
+                </button>
+
+                <button class="sidebar-option stats-option">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256">
+                        <path d="M232,208a8,8,0,0,1-8,8H32a8,8,0,0,1-8-8V48a8,8,0,0,1,16,0v94.37L90.73,98a8,8,0,0,1,10.07-.38l58.81,44.11L218.73,90a8,8,0,1,1,10.54,12l-64,56a8,8,0,0,1-10.07.38L96.39,114.29,40,163.63V200H224A8,8,0,0,1,232,208Z"></path>
+                    </svg>
+                    <span>Stats</span>
+                </button>
+            </div>
+        </div>
+        <main>
+            <div class="timer-page">
+                <div class="container">
+                    <div class="wrapper">
+                        <header class="timer-header">
+                            <div class="timer-title">
+                                <h2 class="timer-title-text">Rubik Timer</h2>
+                            </div>
+                            <div class="theme-switch-container">
+                                <label class="theme-switch">
+                                    <input type="checkbox" class="theme-input" />
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </header>
+                            <div class="dropdown-container">
+                                <button class="cube-order-button">3x3</button>
+                                <div class="dropdown-cube-order-options_hide dropdown-cube-order-options">
+                                    <span class="cube2x2 cube-order-option">2x2</span>
+                                    <span class="cube3x3 cube-order-option">3x3</span>
+                                </div>
+                            </div>
+                            <div class="timer_box">
+                                <div class="content">
+                                    <div class="time">00.000</div>
+                                    <div class="buttons">
+                                        <button class="dnf-button button">DNF</button>
+                                        <button class="remove-button button">Delete</button>
+                                        <button class="plus-2 button">+2</button>
+                                    </div>
+                                    <div class="scramble"></div>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>
-        </div>  
+            <div class="stats-page">
+                <div class="container">
+                    <div class="solve-more-info">
+                        <div class="solves_table">
+                            <div class="solves_header">
+                                <span id="id" class="header_cell">Id</span>
+                                <span id="time" class="header_cell">Time</span>
+                                <span id="ao5" class="header_cell">Ao5</span>
+                                <span class="action_column"></span>
+                            </div>
+                            <div class="solves_body"></div>
+                        </div>
+
+                        <div class="solves-stats">
+                            <div class="stats-header">
+                                <span class="states-header_action-column"></span>
+                                <span class="stats-header_span">Current</span>
+                                <span class="stats-header_span">Best</span>
+                            </div>
+                            <div class="stats-body">
+                                <div class="stat-time">
+                                    <span class="time-title stat-label">Time</span>
+                                    <span class="current current-time">-</span>
+                                    <span class="best best-time">-</span>
+                                </div>
+                                <div class="stat-ao5">
+                                    <span class="ao5-title stat-label">Ao5</span>
+                                    <span class="current current-ao5">-</span>
+                                    <span class="best best-ao5">-</span>
+                                </div>
+                                <div class="stat-ao12">
+                                    <span class="ao12-title stat-label">Ao12</span>
+                                    <span class="current current-ao12">-</span>
+                                    <span class="best best-ao12">-</span>
+                                </div>
+                                <div class="stat-ao25">
+                                    <span class="ao25-title stat-label">Ao25</span>
+                                    <span class="current current-ao25">-</span>
+                                    <span class="best best-ao25">-</span>
+                                </div>
+                                <div class="stat-ao50">
+                                    <span class="ao50-title stat-label">Ao50</span>
+                                    <span class="current current-ao50">-</span>
+                                    <span class="best best-ao50">-</span>
+                                </div>
+                                <div class="stat-ao100">
+                                    <span class="ao100-title stat-label">Ao100</span>
+                                    <span class="current current-ao100">-</span>
+                                    <span class="best best-ao100">-</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 </body>
 </html>
