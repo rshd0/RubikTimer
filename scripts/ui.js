@@ -504,7 +504,18 @@ function changeCubeOrder(settings, cube_order_list, order){
 function sidebarBtnHandler(){
     const sidebar = document.querySelector(".sidebar")
     sidebar.classList.toggle("closed")
+}
 
+function pagesButtonHandler(event){
+    const timer_page = document.querySelector(".timer-page")
+    const stats_page = document.querySelector(".stats-page")
+    if (event.currentTarget.classList.contains("timer-option")){
+        timer_page.hidden = false
+        stats_page.hidden = true
+    }else if(event.currentTarget.classList.contains("stats-option")){
+        timer_page.hidden = true
+        stats_page.hidden = false
+    }
 }
 
 export function initUI(settings){
@@ -517,7 +528,7 @@ export function initUI(settings){
     const cube3x3 = document.querySelector(".cube3x3");
     const cube_order_list  = document.querySelector(".dropdown-cube-order-options_hide");
     const sidebar_button = document.querySelector(".menu-btn")
-    
+    const pages_btn = document.querySelectorAll(".sidebar-option")
 
     let is_cube_order_list_hide = true;
     let solves = JSON.parse(localStorage.getItem(settings.cube_order)) || [];
@@ -526,7 +537,11 @@ export function initUI(settings){
     initializeTheme(settings, toggle)
     renderSolveTable(settings);
     renderStatsPanel(solves, settings)
-    
+    pages_btn.forEach(button => {
+        console.log("btn")
+        button.addEventListener("click", event => pagesButtonHandler(event))
+    })
+
     cube_order_button.textContent = settings.cube_order;
     document.addEventListener("keydown", handleTimerKeyDown)
     document.addEventListener("keyup", handleTimerKeyUp)
@@ -538,4 +553,5 @@ export function initUI(settings){
     cube2x2.addEventListener("click", event => changeCubeOrder(settings, cube_order_list, "2x2"))
     cube3x3.addEventListener("click", event => changeCubeOrder(settings, cube_order_list, "3x3"))
     sidebar_button.addEventListener("click", event => sidebarBtnHandler())
+    
 }

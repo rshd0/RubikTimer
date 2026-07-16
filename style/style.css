@@ -92,6 +92,7 @@ body{
 }
 
 .sidebar{
+    flex-shrink: 0;
     width: 17rem;
     padding: var(--space-xs);
     border-right: 1px solid #44403b;
@@ -115,6 +116,7 @@ body{
     outline: none;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .menu-btn > svg{
@@ -147,7 +149,7 @@ body{
 
 .sidebar.closed .sidebar-nav button svg{
     margin: 0;
-    width: 1.7;
+    width: 1.7rem;
 }
 
 .sidebar.closed header .menu-btn{
