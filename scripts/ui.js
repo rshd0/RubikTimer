@@ -377,11 +377,7 @@ function handleRunningTimer(){
     is_key_down = false;
     timeEl.dataset.state = "normal";
 
-    rubik_scramble.style.opacity = "1";
-    buttons.forEach(button => button.style.opacity = "1");
-    cube_order_button.style.opacity = "1";
-    slider.style.opacity = "1"
-    timer_title.style.opacity = "1"
+    document.querySelector(".layout").classList.remove("focus-mode")
 
     scramble = renderScramble(settings);
 }
@@ -395,12 +391,8 @@ function prepareTimerStart(){
             setTimeout(() => {
                 document.body.style.overflow = "hidden";
             }, 200)
-            rubik_scramble.style.opacity = "0";
-            buttons.forEach(button => button.style.opacity = "0");
-            cube_order_button.style.opacity = "0";
-            slider.style.opacity = "0"
-            timer_title.style.opacity = "0"
-      
+
+            document.querySelector(".layout").classList.add("focus-mode")
             timeEl.dataset.state = "ready";
         }, 250)
 
@@ -538,10 +530,9 @@ export function initUI(settings){
     renderSolveTable(settings);
     renderStatsPanel(solves, settings)
     pages_btn.forEach(button => {
-        console.log("btn")
         button.addEventListener("click", event => pagesButtonHandler(event))
     })
-
+    
     cube_order_button.textContent = settings.cube_order;
     document.addEventListener("keydown", handleTimerKeyDown)
     document.addEventListener("keyup", handleTimerKeyUp)

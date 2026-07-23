@@ -28,6 +28,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+    height: 100vh;
 }
 ol, ul {
 	list-style: none;
@@ -64,6 +65,7 @@ body{
 
 .layout{
     display: flex;
+    height: 100vh;
 }
 
 .container{
@@ -76,7 +78,6 @@ body{
 .wrapper{
     display: flex;
     flex-direction: column;
-    height: 100vh;
 }
 
 .timer-title-text{
@@ -96,6 +97,9 @@ body{
     width: 17rem;
     padding: var(--space-xs);
     border-right: 1px solid #44403b;
+    border-top-right-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
+    transition: all var(--transition-normal);
 }
 
 
@@ -106,7 +110,7 @@ body{
 }
 
 .sidebar > header > button > svg{
-    transition: all 0.3s;
+    transition: all var(--transition-normal);
 }
 
 .sidebar button{
@@ -117,10 +121,11 @@ body{
     display: flex;
     align-items: center;
     cursor: pointer;
+    font-size: var(--font-size-sm);
 }
 
 .menu-btn > svg{
-    width: 1.5rem;
+    width: var(--space-lg);
 }
 
 .sidebar-nav{
@@ -130,6 +135,8 @@ body{
 
 .sidebar-nav button svg {
     margin-right: var(--space-xs);
+    transition: all var(--transition-normal);
+    width: 1.8rem;
 }
 
 .sidebar button:hover{
@@ -152,12 +159,17 @@ body{
     width: 1.7rem;
 }
 
+.sidebar.closed .sidebar-nav button{
+    display: flex;
+    justify-content: center;
+}
+
 .sidebar.closed header .menu-btn{
     display: none;
 }
 
 .sidebar.closed header > svg{
-    width: 2rem;
+    width: var(--space-xl);
 }
 
 .sidebar.closed header:hover > svg{
@@ -166,6 +178,8 @@ body{
 
 .sidebar.closed header:hover > svg + .menu-btn{
     display: block; 
+    width: var(--space-xl);
+    height: var(--space-xl);
 }
 
 .sidebar.closed header:hover > svg + .menu-btn > svg {
@@ -177,10 +191,31 @@ body{
     justify-content: center;
 }
 
+main{
+    /* display: flex;
+    justify-content: center; */
+    width: 100%; 
+    padding: var(--space-md);
+}
+
+.timer-page{
+    width: 100%;
+}
+
+.focus-mode .dropdown-container,
+.focus-mode .buttons,
+.focus-mode .scramble,
+.focus-mode .sidebar, 
+.focus-mode .slider,
+.focus-mode .timer-header{
+    opacity: 0;
+    pointer-events: none;
+}
+
 .timer-header{
     display: flex;
     justify-content: space-between;
-    padding-top: var(--space-md);
+    transition: all var(--transition-normal);
 }
 
 .dropdown-container{
@@ -189,6 +224,7 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    transition: all var(--transition-normal);
 }
 
 .cube-order-button{
@@ -251,7 +287,7 @@ body{
     background: rgb(55, 71, 79);
     border-radius: 34px;
     cursor: pointer;
-    transition: .3s;
+    transition: all var(--transition-normal);
 }
 
 .slider::before {
@@ -306,7 +342,8 @@ body{
     display: flex;
     justify-content: center;
     gap: 10rem; 
-    margin: var(--space-2xl) 0;   
+    margin: var(--space-2xl) 0;  
+    transition: all var(--transition-normal); 
 }
 
 .button{
@@ -340,7 +377,7 @@ body{
 .scramble{
     font-size: var(--scramble-font-size);
     word-spacing: 0.8rem;
-    transition: opacity var(--transition-fast) ease-in;
+    transition: all var(--transition-normal) ease-in;
 }
 
 
