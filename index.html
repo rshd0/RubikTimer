@@ -64,92 +64,92 @@
             </div>
         </div>
         <main>
+            <header class="timer-header">
+                <div class="timer-title">
+                    <h2 class="timer-title-text">Rubik Timer</h2>
+                </div>
+                <div class="dropdown-container">
+                    <div class="dropdown">
+                        <button class="dropdown-toggle">
+                            <svg class="cube-svg" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 32 32"
+                                width="24"
+                                height="24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round">
+
+                                <rect x="4" y="4" width="24" height="24" rx="2"/>
+
+                                <line x1="12" y1="4" x2="12" y2="28"/>
+                                <line x1="20" y1="4" x2="20" y2="28"/>
+
+                                <line x1="4" y1="12" x2="28" y2="12"/>
+                                <line x1="4" y1="20" x2="28" y2="20"/>
+
+                            </svg>
+                            <span>3x3</span>
+                            <svg class="arrow-svg" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256">
+                                <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path>
+                            </svg>
+                        </button>
+                        <div class="dropdown-menu">
+                            <button class="cube-size-option" data-size="2x2">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 32 32"
+                                    width="24"
+                                    height="24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round">
+
+                                    <rect x="4" y="4" width="24" height="24" rx="2"/>
+
+                                    <line x1="16" y1="4" x2="16" y2="28"/>
+                                    <line x1="4" y1="16" x2="28" y2="16"/>
+
+                                </svg>
+                                <span>2x2</span>
+                            </button>
+                            <button class="cube-size-option" data-size="3x3">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 32 32"
+                                    width="24"
+                                    height="24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round">
+
+                                    <rect x="4" y="4" width="24" height="24" rx="2"/>
+
+                                    <line x1="12" y1="4" x2="12" y2="28"/>
+                                    <line x1="20" y1="4" x2="20" y2="28"/>
+
+                                    <line x1="4" y1="12" x2="28" y2="12"/>
+                                    <line x1="4" y1="20" x2="28" y2="20"/>
+
+                                </svg>
+                                <span>3x3</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="theme-switch-container">
+                    <label class="theme-switch">
+                        <input type="checkbox" class="theme-input" />
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </header>
             <div class="timer-page">
-                <header class="timer-header">
-                    <div class="timer-title">
-                        <h2 class="timer-title-text">Rubik Timer</h2>
-                    </div>
-                    <div class="theme-switch-container">
-                        <label class="theme-switch">
-                            <input type="checkbox" class="theme-input" />
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                </header>
                 <div class="container">
                     <div class="wrapper">
-                            <div class="dropdown-container">
-                                <div class="dropdown">
-                                    <button class="dropdown-toggle">
-                                        <svg class="cube-svg" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 32 32"
-                                            width="24"
-                                            height="24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round">
-
-                                            <rect x="4" y="4" width="24" height="24" rx="2"/>
-
-                                            <line x1="12" y1="4" x2="12" y2="28"/>
-                                            <line x1="20" y1="4" x2="20" y2="28"/>
-
-                                            <line x1="4" y1="12" x2="28" y2="12"/>
-                                            <line x1="4" y1="20" x2="28" y2="20"/>
-
-                                        </svg>
-                                        <span>3x3</span>
-                                        <svg class="arrow-svg" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256">
-                                            <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path>
-                                        </svg>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <button class="cube-size-option" data-size="2x2">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 32 32"
-                                                width="24"
-                                                height="24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                stroke-width="2"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round">
-
-                                                <rect x="4" y="4" width="24" height="24" rx="2"/>
-
-                                                <line x1="16" y1="4" x2="16" y2="28"/>
-                                                <line x1="4" y1="16" x2="28" y2="16"/>
-
-                                            </svg>
-                                            <span>2x2</span>
-                                        </button>
-                                        <button class="cube-size-option" data-size="3x3">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 32 32"
-                                                width="24"
-                                                height="24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                stroke-width="2"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round">
-
-                                                <rect x="4" y="4" width="24" height="24" rx="2"/>
-
-                                                <line x1="12" y1="4" x2="12" y2="28"/>
-                                                <line x1="20" y1="4" x2="20" y2="28"/>
-
-                                                <line x1="4" y1="12" x2="28" y2="12"/>
-                                                <line x1="4" y1="20" x2="28" y2="20"/>
-
-                                            </svg>
-                                            <span>3x3</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="timer_box">
                                 <div class="content">
                                     <div class="time">00.000</div>

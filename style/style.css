@@ -80,6 +80,11 @@ body{
     flex-direction: column;
 }
 
+.timer-title{
+    display: flex;
+    justify-content: center;
+}
+
 .timer-title-text{
     font-size: var(--font-size-lg);
 }
@@ -213,7 +218,8 @@ main{
 }
 
 .timer-header{
-    display: flex;
+    display: grid;
+    grid-template-columns: 20% 20% 20%;
     justify-content: space-between;
     transition: all var(--transition-normal);
 }
@@ -292,6 +298,11 @@ main{
 
 .dropdown-menu > *:first-child{
     margin: 0;
+}
+
+.theme-switch-container{
+    display: flex;
+    justify-content: center;
 }
 
 .theme-switch {
