@@ -219,55 +219,79 @@ main{
 }
 
 .dropdown-container{
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown button{
+    color: var(--text);
+    background-color: var(--background);
+    border: none;
+    outline: none;
+}
+
+.dropdown-toggle {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: var(--space-2xs);
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--radius);
+    width: 6rem;
+    height: 3rem;
+    font-size: var(--font-size-md);
+}
+
+.dropdown-toggle > svg {
+    width: 1.5rem;
+    transition: transform var(--transition-normal);
+}
+
+.dropdown-menu{
+    display: flex;
     flex-direction: column;
-    transition: all var(--transition-normal);
-}
-
-.cube-order-button{
-    background-color: var(--button-bg);
-    border: none;
-    outline: none;
-    color: var(--text);
-    font-size: var(--font-size-xl);
-    margin-top: var(--space-md);
-    cursor: pointer;
-}
-
-.dropdown-cube-order-options{
-    transition: opacity var(--transition-fast) ease-in-out 20ms;
-}
-
-.dropdown-cube-order-options_hide{
     opacity: 0;
     visibility: hidden;
+    transform: translateY(-5px);
+    pointer-events: none;
+    margin-top: var(--space-xs);
+    transition:
+        opacity .3s,
+        transform .3s,  
+        visibility .3s;
 }
 
-.dropdown-cube-order-options_show{
+.dropdown.open > .dropdown-menu{
     opacity: 1;
     visibility: visible;
+    transform: translateY(0);   
+    pointer-events: auto;
 }
 
-.cube-order-option{
-    display: block;
+.dropdown.open > .dropdown-toggle > .arrow-svg{
+    transform: rotate(180deg);
+}
+
+.dropdown-menu > button {
+    font-size: var(--font-size-md);
+}
+
+.cube-size-option{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: var(--space-2xs);
-    font-size: var(--font-size-lg);
-    padding: var(--space-2xs);
-    cursor: pointer;
-    transition: all var(--transition-fast) ease 20ms;
+    gap: var(--space-2xs);
 }
 
-.cube-order-option:first-child{
-    margin-top: var(--space-xs);
+.cube-size-option > svg {
+    width: 1.2rem;
+    height: 1.2rem;
 }
 
-.cube-order-option:hover{
-    background-color: var(--menu-hover-bg);
-    color: var(--menu-hover-text);
-    border-radius: var(--radius);
+.dropdown-menu > *:first-child{
+    margin: 0;
 }
 
 .theme-switch {

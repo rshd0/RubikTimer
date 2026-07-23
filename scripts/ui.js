@@ -477,18 +477,9 @@ function remove_button_handler(settings){
     }
 }
 
-function cube_order_handler(settings, cube_order_list){
-    cube_order_list.classList.toggle("dropdown-cube-order-options_show");
-    cube_order_list.classList.toggle("dropdown-cube-order-options_hide");
-
-    cube_order_button.textContent = settings.cube_order;
-}
-
-function changeCubeOrder(settings, cube_order_list, order){
-    settings.cube_order = order;
+function changeCubeSize(settings, size){
+    settings.cube_order = size;
     localStorage.setItem("settings", JSON.stringify(settings))
-    cube_order_list.classList.replace("dropdown-cube-order-options_show", "dropdown-cube-order-options_hide");
-    cube_order_button.textContent = settings.cube_order;
     updateStates(settings)
     scramble = renderScramble(settings);
 }
@@ -510,39 +501,57 @@ function pagesButtonHandler(event){
     }
 }
 
+function cubeSizeOptionHandler(settings, option){
+    const dropdown_container = document.querySelector(".dropdown");
+    const dropdown_text = document.querySelector(".dropdown-toggle > span");
+    const cube_icon = document.querySelector(".cube-svg");
+    const svg = option.querySelector("svg").cloneNode(true);
+    let cube_size = option.dataset.size;
+
+    changeCubeSize(settings, cube_size);
+    dropdown_text.textContent = cube_size;
+    dropdown_container.classList.remove("open");
+
+    svg.classList.add("cube-svg");
+    cube_icon.replaceWith(svg);
+}
+
 export function initUI(settings){
     const dnf_button = document.querySelector(".dnf-button");
     const plus_2 = document.querySelector(".plus-2");
-    const toggle = document.querySelector(".theme-input")  
+    const toggle = document.querySelector(".theme-input");
     const remove_button = document.querySelector(".remove-button");
-    const cube_order_button = document.querySelector(".cube-order-button");
-    const cube2x2 = document.querySelector(".cube2x2");
-    const cube3x3 = document.querySelector(".cube3x3");
-    const cube_order_list  = document.querySelector(".dropdown-cube-order-options_hide");
-    const sidebar_button = document.querySelector(".menu-btn")
-    const pages_btn = document.querySelectorAll(".sidebar-option")
+    const sidebar_button = document.querySelector(".menu-btn");
+    const pages_btn = document.querySelectorAll(".sidebar-option");
+    const dropdown_container = document.querySelector(".dropdown");
+    const dropdown = document.querySelector(".dropdown-toggle");
+    const dropdown_text = document.querySelector(".dropdown-toggle > span");
+    const cube_size_options = document.querySelectorAll(".cube-size-option");
 
-    let is_cube_order_list_hide = true;
     let solves = JSON.parse(localStorage.getItem(settings.cube_order)) || [];
 
     scramble = renderScramble(settings);
-    initializeTheme(settings, toggle)
+    initializeTheme(settings, toggle);
     renderSolveTable(settings);
-    renderStatsPanel(solves, settings)
+    renderStatsPanel(solves, settings);
     pages_btn.forEach(button => {
-        button.addEventListener("click", event => pagesButtonHandler(event))
+        button.addEventListener("click", event => pagesButtonHandler(event));
     })
     
-    cube_order_button.textContent = settings.cube_order;
-    document.addEventListener("keydown", handleTimerKeyDown)
-    document.addEventListener("keyup", handleTimerKeyUp)
-    toggle.addEventListener("change", event => handleThemeToggle(event, toggle, settings))
-    dnf_button.addEventListener("click", event => dnf_button_handler(settings))
-    plus_2.addEventListener("click", event => plus2_button_handler(settings))
-    remove_button.addEventListener("click", event => remove_button_handler(settings))
-    cube_order_button.addEventListener("click", event => cube_order_handler(settings, cube_order_list))
-    cube2x2.addEventListener("click", event => changeCubeOrder(settings, cube_order_list, "2x2"))
-    cube3x3.addEventListener("click", event => changeCubeOrder(settings, cube_order_list, "3x3"))
-    sidebar_button.addEventListener("click", event => sidebarBtnHandler())
+    dropdown_text.textContent = settings.cube_order;
+    document.addEventListener("keydown", handleTimerKeyDown);
+    document.addEventListener("keyup", handleTimerKeyUp);
+    toggle.addEventListener("change", event => handleThemeToggle(event, toggle, settings));
+    dnf_button.addEventListener("click", event => dnf_button_handler(settings));
+    plus_2.addEventListener("click", event => plus2_button_handler(settings));
+    remove_button.addEventListener("click", event => remove_button_handler(settings));
+    sidebar_button.addEventListener("click", event => sidebarBtnHandler());
+    dropdown.addEventListener("click", () => dropdown_container.classList.toggle("open"));
+    cube_size_options.forEach(option => option.addEventListener("click", event => cubeSizeOptionHandler(settings, option)));
     
+    document.addEventListener("click", (e) => {
+        if (!dropdown_container.contains(e.target)) {
+            dropdown_container.classList.remove("open");
+        }
+    });
 }
