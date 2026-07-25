@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="./scripts/main.js"></script>
 </head>
 
@@ -166,6 +167,13 @@
             </div>
             <div class="stats-page" hidden>
                 <div class="container">
+                    <div class="chart-container chart-container--pie">
+                        <canvas id="cube-distribution-chart"></canvas>
+                    </div>
+
+                    <div class="chart-container chart-container--progress">
+                        <canvas id="solve-progress-chart"></canvas>
+                    </div>
                     <div class="solve-more-info">
                         <div class="solves_table">
                             <div class="solves_header">

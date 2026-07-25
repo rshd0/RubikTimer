@@ -13,6 +13,8 @@ const timer_title = document.querySelector(".timer-title-text");
 let ready_to_start = false;
 let is_key_down = false;
 let getting_ready, scramble;
+let cubeDistributionChart = null;
+let solveProgressChart = null;
 
 export function renderScramble(settings){
     let cube_order = settings.cube_order
@@ -373,6 +375,8 @@ function handleRunningTimer(){
             
     renderSolveTable(settings);
     renderStatsPanel(solves, settings);
+    updateCubeDistributionChart()
+    updateSolveProgressChart(settings)
 
     is_key_down = false;
     timeEl.dataset.state = "normal";
@@ -516,6 +520,98 @@ function cubeSizeOptionHandler(settings, option){
     cube_icon.replaceWith(svg);
 }
 
+function updateCubeDistributionChart(){
+    let numberOf2x2Solves = JSON.parse(localStorage.getItem("2x2")).length
+    let numberOf3x3Solves = JSON.parse(localStorage.getItem("3x3")).length
+
+    cubeDistributionChart.data.datasets[0].data[0] = numberOf2x2Solves
+    cubeDistributionChart.data.datasets[0].data[1] = numberOf3x3Solves
+}
+
+function renderCubeDistributionChart(){
+    const cubeDistributionChartEl = document.querySelector("#cube-distribution-chart");
+    let numberOf2x2Solves = JSON.parse(localStorage.getItem("2x2")).length;
+    let numberOf3x3Solves = JSON.parse(localStorage.getItem("3x3")).length;
+
+    cubeDistributionChart = new Chart(cubeDistributionChartEl, {
+        type: 'pie',
+        data: {
+            labels: ["2x2", "3x3"],
+            datasets: [{
+                label: "Solves",
+                data: [numberOf2x2Solves, numberOf3x3Solves],
+                backgroundColor: [
+                    '#f1c40f',
+                    '#3498db',
+                ],
+                borderWidth: 2,
+                borderColor: '#fff'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 20,
+                        usePointStyle: true
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Solve Distribution",
+                    font: {
+                        size: 16
+                    }
+                }
+            }
+        }
+    });
+}
+
+function updateSolveProgressChart(settings){
+    let solves = JSON.parse(localStorage.getItem(settings.cube_order));
+    let solveLabels = [];
+    let times = [];
+    solves.forEach(solve => {
+        solveLabels.push(solve.id);
+        times.push(solve.time);
+    })
+
+    solveProgressChart.data.labels = solveLabels;
+    solveProgressChart.data.datasets[0].data = times;
+    solveProgressChart.update();
+}
+
+function renderSolveProgressChart(settings){
+    const solveProgressChartEl = document.querySelector("#solve-progress-chart")
+    let solves = JSON.parse(localStorage.getItem(settings.cube_order))
+    let solveLabels = []
+    let times = []
+    solves.forEach(solve => {
+        solveLabels.push(solve.id)
+        times.push(solve.time)
+    })
+
+    solveProgressChart = new Chart(solveProgressChartEl, {
+        type: "line",
+        data: {
+            labels: solveLabels,
+            
+            datasets: [{
+                label: "Solves",
+                data: times
+            }]
+        }
+    })
+}
+
+function renderCharts(settings){
+    renderCubeDistributionChart()
+    renderSolveProgressChart(settings)
+}   
+
 export function initUI(settings){
     const dnf_button = document.querySelector(".dnf-button");
     const plus_2 = document.querySelector(".plus-2");
@@ -537,6 +633,7 @@ export function initUI(settings){
     pages_btn.forEach(button => {
         button.addEventListener("click", event => pagesButtonHandler(event));
     })
+    renderCharts(settings)
     
     dropdown_text.textContent = settings.cube_order;
     document.addEventListener("keydown", handleTimerKeyDown);
