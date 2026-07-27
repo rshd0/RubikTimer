@@ -497,90 +497,36 @@ main{
 
 
 
-
-
-
-.solves-stats{
-    box-sizing: border-box;
-    padding: var(--space-md);
-    width: 18rem;
-    border: var(--border-width) solid var(--border-color);
+.stats-summary{
+    display: grid;
+    gap: var(--space-xs);
+    grid-template-columns: repeat(2, 1fr);
+    width: 16rem;
+}
+.summary-card{
+    background-color: #27272a;
+    color: var(--text);
+    padding: var(--space-sm);
+    width: 8.5rem;
+    min-height: 6rem;
     border-radius: var(--radius);
-    height: 15rem;
+}
+.summary-card > header{
+    text-align: center;
+    margin-bottom: var(--space-lg);
 }
 
-
-.solves-stats span{
-    display: block;
-    width: 55px;
+.summary-content{
+    display: flex;
+    justify-content: space-between;
     text-align: center;
 }
 
-.solves-stats > div{
-    display: flex;
-    justify-content: space-between;
-}
-
-.states-header_action-column{
-    display: block;
-    width: 55px;
-}
-.stats-header{
-    border-bottom: var(--border-width) solid var(--table-header-divider-color);
-    padding-bottom: var(--space-md);
-    margin-bottom: var(--space-md);
-}
-
-.stats-body span{
+.stat-label{
     margin-bottom: var(--space-xs);
 }
 
-.stats-header_span{
-    display: block;
 
-}
-
-.stats-body{
-    display: flex;
-    flex-direction: column;
-
-}
-
-.stats-body > div{
-    display: flex;
-    justify-content: space-between;
-}
-
-.stat-time{
-
-}
-.time-title{
-
-}
-.stat-label{
-
-}
-.time-value{
-
-}
-.stat-ao5{
-
-}
-.stat-ao12{
-
-}
-.ao5-title{
-
-}
-.ao5-value{
-
-}
-.ao12-title{
-
-}
-.ao12-value{
-
-}
 
 .solve-info-wrapper{
     display: none;

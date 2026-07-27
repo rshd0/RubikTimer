@@ -93,3 +93,20 @@ export function prepareAverages(){
     
     return averages_dict;
 }
+
+export function getOverViewStats(settings){
+    let solves = JSON.parse(localStorage.getItem(settings.cube_order))
+    let dnfs = 0
+    let dnfRate = (dnfs/solves.length)*100
+    solves.forEach(solve => {
+        if (solve.status === "dnf"){
+            dnfs++
+        }
+    })
+
+    return {
+        totalSolves: solves.length,
+        totalDnfs: dnfs,
+        dnfRate: dnfRate   
+    }
+}

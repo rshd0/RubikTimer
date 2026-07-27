@@ -1,5 +1,5 @@
 import { deleteSolve, get_settings, saveSolve } from "./storage.js";
-import { updateAverages, prepareAverages } from "./averages.js";
+import { updateAverages, prepareAverages, getOverViewStats } from "./averages.js";
 import { scrambleController } from "./scramble.js";
 import { is_running, start_timer, stop_timer } from "./timer.js";
 
@@ -184,8 +184,11 @@ export function formateTime(time, is_running){
 }
 
 export function renderStatsPanel(solves, settings){
-    const current_time_element = document.querySelector(".current-time");
-    const best_time_element = document.querySelector(".best-time");    
+    const current_time_element = document.querySelector(".last-time");
+    const best_time_element = document.querySelector(".best-time");  
+    const totalSolvesEl = document.querySelector(".total-solve");
+    const totalDnfEl = document.querySelector(".total-dnf");
+
     let times = []
     let averages = getAveragesTimeList(settings)
 
@@ -198,9 +201,11 @@ export function renderStatsPanel(solves, settings){
     for (let [average, element] of Object.entries(elements)){
         let best = manage_getBests(averages[`ao${average}`]);
         let current = averages[`ao${average}`][averages[`ao${average}`].length - 1];
-        
-        element["current"].textContent = get_time(current)
-        element["best"].textContent = get_time(best)
+
+        if (element["currnet"] !== null && element["best"] !== null){
+            element["current"].textContent = get_time(current)
+            element["best"].textContent = get_time(best)
+        }
     }
 
     let current_time = "-"
@@ -218,9 +223,13 @@ export function renderStatsPanel(solves, settings){
     
     
     let best_time = manage_getBests(times)
+    let overView = getOverViewStats(settings)
     
     current_time_element.textContent = get_time(current_time)
     best_time_element.textContent = get_time(best_time)
+    totalSolvesEl.textContent = overView.totalSolves;
+    totalDnfEl.textContent = overView.totalDnfs;
+
 }
 
 
@@ -254,7 +263,7 @@ function getAoElements(settings){
 
     averages_list.forEach(n => {
         map[n] = {
-            current: document.querySelector(`.current-ao${n}`),
+            current: document.querySelector(`.last-ao${n}`),
             best: document.querySelector(`.best-ao${n}`)
         }
     })
