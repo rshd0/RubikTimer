@@ -398,7 +398,8 @@ function handleRunningTimer(){
 }
 
 function prepareTimerStart(){
-    if (!is_key_down){
+    let timerPage = document.querySelector(".timer-page");
+    if (!is_key_down && timerPage.hidden != true){
         is_key_down = true;
         getting_ready = setTimeout(() => {
             ready_to_start = true;
@@ -534,7 +535,7 @@ function cubeSizeOptionHandler(settings, option){
 function updateCubeDistributionChart(){
     let numberOf2x2Solves = JSON.parse(localStorage.getItem("2x2")).length
     let numberOf3x3Solves = JSON.parse(localStorage.getItem("3x3")).length
-    
+
     cubeDistributionChart.data.datasets[0].data[0] = numberOf2x2Solves;
     cubeDistributionChart.data.datasets[0].data[1] = numberOf3x3Solves;
     cubeDistributionChart.update();
