@@ -167,76 +167,80 @@
             </div>
             <div class="stats-page" hidden>
                 <div class="container">
-                    <div class="chart-container chart-container--pie">
-                        <canvas id="cube-distribution-chart"></canvas>
-                    </div>
+                    <div class="stats-container">
+                        <div class="stats-summary">
+                            <div class="summary-card time-card">
+                                <header>Time</header>
+                                <div class="summary-content">
+                                    <div class="stat-item">
+                                        <div class="stat-label">Best</div>
+                                        <span class="stat-value best-time">-</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-label">Last</div>
+                                        <span class="stat-value last-time">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="summary-card">
+                                <header>Ao5</header>
+                                <div class="summary-content">
+                                    <div class="stat-item">
+                                        <div class="stat-label">Best</div>
+                                        <span class="stat-value best-ao5">-</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-label">Last</div>
+                                        <span class="stat-value last-ao5">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="summary-card">
+                                <header>Ao12</header>
+                                <div class="summary-content">
+                                    <div class="stat-item">
+                                        <div class="stat-label">Best</div>
+                                        <span class="stat-value best-ao12">-</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-label">Last</div>
+                                        <span class="stat-value last-ao12">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="summary-card">
+                                <header>Overview</header>
+                                <div class="summary-content">
+                                    <div class="stat-item">
+                                        <div class="stat-label">Solves</div>
+                                        <span class="stat-value total-solve">-</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-label">DNFs</div>
+                                        <span class="stat-value total-dnf">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-container chart-container--progress">
+                            <canvas id="solve-progress-chart"></canvas>
+                        </div>
 
-                    <div class="chart-container chart-container--progress">
-                        <canvas id="solve-progress-chart"></canvas>
-                    </div>
-                    <div class="solve-more-info">
-                        <div class="solves_table">
-                            <div class="solves_header">
-                                <span id="id" class="header_cell">Id</span>
-                                <span id="time" class="header_cell">Time</span>
-                                <span id="ao5" class="header_cell">Ao5</span>
-                                <span class="action_column"></span>
-                            </div>
-                            <div class="solves_body"></div>
-                        </div>   
-                    </div>
-                    <div class="stats-summary">
-                        <div class="summary-card time-card">
-                            <header>Time</header>
-                            <div class="summary-content">
-                                <div class="stat-item">
-                                    <div class="stat-label">Best</div>
-                                    <span class="stat-value best-time">-</span>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-label">Last</div>
-                                    <span class="stat-value last-time">-</span>
-                                </div>
-                            </div>
+                        <div class="chart-container chart-container--pie">
+                            <canvas id="cube-distribution-chart"></canvas>
                         </div>
-                        <div class="summary-card">
-                            <header>Ao5</header>
-                            <div class="summary-content">
-                                <div class="stat-item">
-                                    <div class="stat-label">Best</div>
-                                    <span class="stat-value best-ao5">-</span>
+                        
+                        <div class="solve-more-info">
+                            <div class="solves_table">
+                                <div class="solves_header">
+                                    <span id="id" class="header_cell">Id</span>
+                                    <span id="time" class="header_cell">Time</span>
+                                    <span id="ao5" class="header_cell">Ao5</span>
+                                    <span class="action_column"></span>
                                 </div>
-                                <div class="stat-item">
-                                    <div class="stat-label">Last</div>
-                                    <span class="stat-value last-ao5">-</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="summary-card">
-                            <header>Ao12</header>
-                            <div class="summary-content">
-                                <div class="stat-item">
-                                    <div class="stat-label">Best</div>
-                                    <span class="stat-value best-ao12">-</span>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-label">Last</div>
-                                    <span class="stat-value last-ao12">-</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="summary-card">
-                            <header>Overview</header>
-                            <div class="summary-content">
-                                <div class="stat-item">
-                                    <div class="stat-label">Solves</div>
-                                    <span class="stat-value total-solve">-</span>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-label">DNFs</div>
-                                    <span class="stat-value total-dnf">-</span>
-                                </div>
-                            </div>
+                                <div class="solves_body"></div>
+                            </div>   
                         </div>
                     </div>
                 </div>

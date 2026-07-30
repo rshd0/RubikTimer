@@ -612,6 +612,10 @@ function renderSolveProgressChart(settings){
                 label: "Solves",
                 data: times
             }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
         }
     })
 }
