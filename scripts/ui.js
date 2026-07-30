@@ -306,6 +306,8 @@ export function updateStates(settings){
     
     renderSolveTable(settings);  
     renderStatsPanel(solves, settings);
+    updateCubeDistributionChart();
+    updateSolveProgressChart(settings);
 }
 
 function getAveragesTimeList(settings){
@@ -532,9 +534,10 @@ function cubeSizeOptionHandler(settings, option){
 function updateCubeDistributionChart(){
     let numberOf2x2Solves = JSON.parse(localStorage.getItem("2x2")).length
     let numberOf3x3Solves = JSON.parse(localStorage.getItem("3x3")).length
-
-    cubeDistributionChart.data.datasets[0].data[0] = numberOf2x2Solves
-    cubeDistributionChart.data.datasets[0].data[1] = numberOf3x3Solves
+    
+    cubeDistributionChart.data.datasets[0].data[0] = numberOf2x2Solves;
+    cubeDistributionChart.data.datasets[0].data[1] = numberOf3x3Solves;
+    cubeDistributionChart.update();
 }
 
 function renderCubeDistributionChart(){
@@ -584,8 +587,15 @@ function updateSolveProgressChart(settings){
     let solveLabels = [];
     let times = [];
     solves.forEach(solve => {
-        solveLabels.push(solve.id);
-        times.push(solve.time);
+        solveLabels.push(solve.id)        
+        let time = prepareTime(solve.time);
+        if (solve.status === "dnf"){
+            time = null
+        }else if(solve.status === "plus2"){
+            time = prepareTime(apply_plus2(solve.time))
+        }
+
+        times.push(time)
     })
 
     solveProgressChart.data.labels = solveLabels;
@@ -599,8 +609,15 @@ function renderSolveProgressChart(settings){
     let solveLabels = []
     let times = []
     solves.forEach(solve => {
-        solveLabels.push(solve.id)
-        times.push(solve.time)
+        solveLabels.push(solve.id)        
+        let time = prepareTime(solve.time);
+        if (solve.status === "dnf"){
+            time = null
+        }else if(solve.status === "plus2"){
+            time = prepareTime(apply_plus2(solve.time))
+        }
+            
+        times.push(time)
     })
 
     solveProgressChart = new Chart(solveProgressChartEl, {
