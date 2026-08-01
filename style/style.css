@@ -145,7 +145,8 @@ body{
 }
 
 .sidebar button:hover{
-    background-color: #27272a;
+    background-color: var(--menu-hover-bg);
+    color: var(--menu-hover-text);
     border-radius: var(--radius);
 }
 
@@ -245,11 +246,19 @@ main{
     width: 6rem;
     height: 3rem;
     font-size: var(--font-size-md);
+    transition: 
+        color var(--transition-normal),
+        background-color var(--transition-normal);
 }
 
 .dropdown-toggle > svg {
     width: 1.5rem;
     transition: transform var(--transition-normal);
+}
+
+.dropdown-toggle:hover{
+    color: var(--menu-hover-text);
+    background-color: var(--menu-hover-bg);
 }
 
 .dropdown-menu{
@@ -279,6 +288,15 @@ main{
 
 .dropdown-menu > button {
     font-size: var(--font-size-md);
+    transition: 
+        color var(--transition-normal),
+        background-color var(--transition-normal);
+    border-radius: var(--radius);
+}
+
+.dropdown-menu > button:hover {
+    color: var(--menu-hover-text);
+    background-color: var(--menu-hover-bg);
 }
 
 .cube-size-option{
@@ -525,7 +543,7 @@ main{
     width: 100%;
 }
 .summary-card{
-    background-color: #27272a;
+    background-color: var(--summary-card-bg);
     color: var(--text);
     padding: var(--space-sm);
     min-height: 6rem;

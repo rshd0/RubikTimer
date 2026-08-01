@@ -3,7 +3,7 @@
     --text: #E0E0E0;
     --ready: #0d542b;
     --waiting: #82181a;
-    --menu-hover-text: #121212;
+    --menu-hover-text: #3f3f46;
     --menu-hover-bg: #E0E0E0;
     --button-bg: transparent;
     --remove-button-active-color: #FA1E14;
@@ -12,6 +12,12 @@
     --overlay-bgcolor: rgba(0, 0, 0, 0.8);
     --border-color: #a1a1a1;
     --table-header-divider-color: #44403b;
+    --pie-chart-3x3: #4F8CFF;
+    --pie-chart-2x2: #9B6DFF;
+    --progress-chart: #35C98A;
+    --progress-chart-grid: #757575; 
+    --summary-card-bg: #27272a;
+    --pie-chart-border: #121212;
 
     
     --border-width: 1px;
@@ -48,7 +54,7 @@
     --background: #E0E0E0;
     --text: #121212;
     --menu-hover-text: #E0E0E0;;
-    --menu-hover-bg: #121212;
+    --menu-hover-bg: #3f3f46;
     --button-bg: transparent;
     --remove-button-active-color: #FA1E14;
     --dnf-button-active-color: #F3C623;
@@ -56,4 +62,6 @@
     --overlay-bgcolor: rgba(0, 0, 0, 0.8);
     --border-color: #a1a1a1;
     --table-header-divider-color: #44403b;
+    --summary-card-bg: #d4d4d4;
+    --pie-chart-border: #E0E0E0;
 }

@@ -354,6 +354,7 @@ function set_theme(isLight, settings){
 
 function handleThemeToggle(event, toggle, settings){ 
     set_theme(toggle.checked, settings)
+    updateChartsColor()
 }
 
 function initializeTheme(settings, toggle){
@@ -542,7 +543,11 @@ function updateCubeDistributionChart(){
 }
 
 function renderCubeDistributionChart(){
+    const styles = getComputedStyle(document.documentElement);
     const cubeDistributionChartEl = document.querySelector("#cube-distribution-chart");
+    const textColor = styles.getPropertyValue("--text").trim();
+    const pieChartBorder = styles.getPropertyValue("--pie-chart-border").trim();
+
     let numberOf2x2Solves = JSON.parse(localStorage.getItem("2x2")).length;
     let numberOf3x3Solves = JSON.parse(localStorage.getItem("3x3")).length;
 
@@ -554,11 +559,11 @@ function renderCubeDistributionChart(){
                 label: "Solves",
                 data: [numberOf2x2Solves, numberOf3x3Solves],
                 backgroundColor: [
-                    '#f1c40f',
-                    '#3498db',
+                    '#9B6DFF',
+                    '#4F8CFF',
                 ],
                 borderWidth: 2,
-                borderColor: '#fff'
+                borderColor: pieChartBorder
             }]
         },
         options: {
@@ -568,14 +573,22 @@ function renderCubeDistributionChart(){
                     position: 'bottom',
                     labels: {
                         padding: 20,
-                        usePointStyle: true
+                        usePointStyle: true,
+                        color: textColor,
+                        font: {
+                            size: 14,
+                            weight: "normal"
+                        }
                     }
                 },
                 title: {
                     display: true,
                     text: "Solve Distribution",
+                    color: textColor,
                     font: {
-                        size: 16
+                        size: 18,
+                        family: "Roboto",
+                        weight: "normal"
                     }
                 }
             }
@@ -606,6 +619,11 @@ function updateSolveProgressChart(settings){
 
 function renderSolveProgressChart(settings){
     const solveProgressChartEl = document.querySelector("#solve-progress-chart")
+    const styles = getComputedStyle(document.documentElement);
+    const textColor = styles.getPropertyValue("--text").trim();
+    const progressChartColor = styles.getPropertyValue("--progress-chart").trim();
+    const progressChartGridColors = styles.getPropertyValue("--progress-chart-grid").trim();
+
     let solves = JSON.parse(localStorage.getItem(settings.cube_order))
     let solveLabels = []
     let times = []
@@ -627,15 +645,91 @@ function renderSolveProgressChart(settings){
             labels: solveLabels,
             
             datasets: [{
-                label: "Solves",
-                data: times
+                label: "Times",
+                data: times,
+                borderColor: progressChartColor,
             }]
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            plugins: { 
+                title: {
+                    display: true,
+                    text: "Solve Progress Chart",
+                    color: textColor,
+                    font: {
+                        size: 18,
+                        family: "Roboto",
+                        weight: "normal"
+                    }
+                },
+                legend: {
+                    position: "bottom",
+                    labels: {
+                        padding: 20,
+                        usePointStyle: true,
+                        color: textColor,
+                        font: {
+                            size: 14,
+                            family: "Roboto",
+                            weight: "normal"
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    grid: {
+                        color: progressChartGridColors,
+                    },
+                    ticks: {
+                        color: textColor,
+                        font: {
+                            size: 12,
+                            family: "Roboto"
+                        }
+                    }
+                },
+                x: {
+                    grid: {
+                        color: progressChartGridColors,
+                    },
+                    ticks: {
+                        color: textColor,
+                        font: {
+                            size: 12,
+                            family: "Roboto"
+                        }
+                    }
+                }
+            }
         }
     })
+}
+
+function updateChartsColor(){
+    const styles = getComputedStyle(document.documentElement);
+    const textColor = styles.getPropertyValue("--text").trim();
+    const pieChartBorder = styles.getPropertyValue("--pie-chart-border").trim();
+    const progressChartColor = styles.getPropertyValue("--progress-chart").trim();
+    const progressChartGridColors = styles.getPropertyValue("--progress-chart-grid").trim();
+
+    solveProgressChart.data.datasets[0].borderColor = progressChartColor;
+    solveProgressChart.options.plugins.title.color = textColor;
+    solveProgressChart.options.plugins.legend.labels.color = textColor;
+    solveProgressChart.options.scales.y.grid.color = progressChartGridColors;
+    solveProgressChart.options.scales.x.grid.color = progressChartGridColors;
+    solveProgressChart.options.scales.y.ticks.color = textColor;
+    solveProgressChart.options.scales.x.ticks.color = textColor;
+
+    cubeDistributionChart.data.datasets[0].borderColor = pieChartBorder;
+    cubeDistributionChart.options.plugins.legend.labels.color = textColor;
+    cubeDistributionChart.options.plugins.title.color = textColor;
+    
+    
+    cubeDistributionChart.update()
+    solveProgressChart.update()
 }
 
 function renderCharts(settings){
