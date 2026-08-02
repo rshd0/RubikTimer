@@ -433,7 +433,11 @@ function startTimerIfReady(){
 }
 
 function handleTimerKeyDown(event){
-    if (event.code === "Space"){
+    if (
+        event.code === "Space" ||
+        event.pointerType === "touch" ||
+        event.pointerType === "pen"
+    ){
         event.preventDefault();
         
         if (is_running){
@@ -446,10 +450,14 @@ function handleTimerKeyDown(event){
 }
 
 function handleTimerKeyUp(event){
-    if (event.code === "Space"){
+    if (
+        event.code === "Space" ||
+        event.pointerType === "touch" ||
+        event.pointerType === "pen"
+    ){
         event.preventDefault();
         if (!ready_to_start){
-            resetTimerState()
+            resetTimerState() 
             return;
         }
         if (!is_running){
@@ -748,6 +756,7 @@ export function initUI(settings){
     const dropdown = document.querySelector(".dropdown-toggle");
     const dropdown_text = document.querySelector(".dropdown-toggle > span");
     const cube_size_options = document.querySelectorAll(".cube-size-option");
+    const timer_page = document.querySelector(".timer-page")
 
     let solves = JSON.parse(localStorage.getItem(settings.cube_order)) || [];
 
@@ -763,6 +772,17 @@ export function initUI(settings){
     dropdown_text.textContent = settings.cube_order;
     document.addEventListener("keydown", handleTimerKeyDown);
     document.addEventListener("keyup", handleTimerKeyUp);
+    timer_page.addEventListener("pointerdown", event => {
+        if (event.pointerType !== "touch" || event.pointerType !== "pen"){return;}
+        
+        timer_page.setPointerCapture(event.pointerId);
+        handleTimerKeyDown(event)
+    })
+    timer_page.addEventListener("pointerup", event => {
+        if (event.pointerType !== "touch" || event.pointerType !== "pen"){return;}
+        
+        handleTimerKeyUp(event)
+    })
     toggle.addEventListener("change", event => handleThemeToggle(event, toggle, settings));
     dnf_button.addEventListener("click", event => dnf_button_handler(settings));
     plus_2.addEventListener("click", event => plus2_button_handler(settings));
