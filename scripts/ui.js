@@ -534,8 +534,8 @@ function cubeSizeOptionHandler(settings, option){
 }
 
 function updateCubeDistributionChart(){
-    let numberOf2x2Solves = JSON.parse(localStorage.getItem("2x2")).length
-    let numberOf3x3Solves = JSON.parse(localStorage.getItem("3x3")).length
+    let numberOf2x2Solves = (JSON.parse(localStorage.getItem("2x2")) || []).length;
+    let numberOf3x3Solves = (JSON.parse(localStorage.getItem("3x3")) || []).length;
 
     cubeDistributionChart.data.datasets[0].data[0] = numberOf2x2Solves;
     cubeDistributionChart.data.datasets[0].data[1] = numberOf3x3Solves;
@@ -548,8 +548,8 @@ function renderCubeDistributionChart(){
     const textColor = styles.getPropertyValue("--text").trim();
     const pieChartBorder = styles.getPropertyValue("--pie-chart-border").trim();
 
-    let numberOf2x2Solves = JSON.parse(localStorage.getItem("2x2")).length;
-    let numberOf3x3Solves = JSON.parse(localStorage.getItem("3x3")).length;
+    let numberOf2x2Solves = (JSON.parse(localStorage.getItem("2x2")) || []).length;
+    let numberOf3x3Solves = (JSON.parse(localStorage.getItem("3x3")) || []).length;
 
     cubeDistributionChart = new Chart(cubeDistributionChartEl, {
         type: 'pie',
@@ -624,7 +624,7 @@ function renderSolveProgressChart(settings){
     const progressChartColor = styles.getPropertyValue("--progress-chart").trim();
     const progressChartGridColors = styles.getPropertyValue("--progress-chart-grid").trim();
 
-    let solves = JSON.parse(localStorage.getItem(settings.cube_order))
+    let solves = JSON.parse(localStorage.getItem(settings.cube_order)) || []
     let solveLabels = []
     let times = []
     solves.forEach(solve => {
