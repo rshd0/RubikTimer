@@ -773,13 +773,13 @@ export function initUI(settings){
     document.addEventListener("keydown", handleTimerKeyDown);
     document.addEventListener("keyup", handleTimerKeyUp);
     timer_page.addEventListener("pointerdown", event => {
-        if (event.pointerType !== "touch" || event.pointerType !== "pen"){return;}
+        if (event.pointerType !== "touch" && event.pointerType !== "pen"){return;}
         
         timer_page.setPointerCapture(event.pointerId);
         handleTimerKeyDown(event)
     })
     timer_page.addEventListener("pointerup", event => {
-        if (event.pointerType !== "touch" || event.pointerType !== "pen"){return;}
+        if (event.pointerType !== "touch" && event.pointerType !== "pen"){return;}
         
         handleTimerKeyUp(event)
     })
