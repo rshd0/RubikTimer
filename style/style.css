@@ -622,6 +622,27 @@ main{
     
 }
 
+@media only screen and (max-width: 1120px){
+    .sidebar-open .summary-card{
+        padding: var(--space-xs);
+        font-size: var(--font-size-xs);
+    }
+}
+
+@media (max-width: 950px) {
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        z-index: 1000;
+        background-color: var(--background);
+    }
+    main{
+        margin-left: 4rem;
+    }
+}
+
 @media only screen and (max-width: 864px){
     .time{
         font-size: 6rem;
@@ -671,7 +692,13 @@ main{
         font-size: 1rem;
         padding: var(--space-md);
     }
+    .sidebar.closed {
+        width: 2.5rem;
+    }
 }
+
+
+
 @media only screen and (max-width: 677px){
     .scramble{
         font-size: 1.2rem;
@@ -727,7 +754,6 @@ main{
         width: 100%;
         display: flex;
         justify-content: center;
-        
     }
     .summary-card {
         font-size: 1rem;
@@ -752,6 +778,9 @@ main{
     }
     .theme-input:checked + .slider::before {
         transform: translateX(22px);
+    }
+    .sidebar.closed {
+        width: 2rem;
     }
 }
 

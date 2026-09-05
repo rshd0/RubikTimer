@@ -512,6 +512,19 @@ function changeCubeSize(settings, size){
 function sidebarBtnHandler(){
     const sidebar = document.querySelector(".sidebar")
     sidebar.classList.toggle("closed")
+    document.body.classList.toggle("sidebar-open")
+}
+
+function closeSidebar(){
+    const sidebar = document.querySelector(".sidebar")
+    sidebar.classList.add("closed")
+    document.body.classList.remove("sidebar-open")
+}
+
+function closeSidebarOnMobile(){
+    if (window.innerWidth < 950){
+        closeSidebar()
+    }
 }
 
 function pagesButtonHandler(event){
@@ -524,6 +537,7 @@ function pagesButtonHandler(event){
         timer_page.hidden = true
         stats_page.hidden = false
     }
+    closeSidebarOnMobile()
 }
 
 function cubeSizeOptionHandler(settings, option){
