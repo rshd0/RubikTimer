@@ -1,0 +1,31 @@
+{
+  "name": "timer",
+  "version": "1.0.0",
+  "description": "A modern, lightweight Rubik's Cube timer for tracking solves, generating scrambles, and analyzing performance.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "vite",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rshd0/RubikTimer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/rshd0/RubikTimer/issues"
+  },
+  "homepage": "https://github.com/rshd0/RubikTimer#readme",
+  "dependencies": {
+    "cubing": "^0.63.4"
+  },
+  "devDependencies": {
+    "vite": "^8.3.0"
+  }
+}
