@@ -5,10 +5,6 @@ import { is_running, start_timer, stop_timer } from "./timer.js";
 
 const rubik_scramble = document.querySelector(".scramble");
 const timeEl = document.querySelector(".time")
-const buttons = document.querySelectorAll(".button");
-const cube_order_button = document.querySelector(".cube-order-button");
-const slider = document.querySelector(".slider")
-const timer_title = document.querySelector(".timer-title-text");
 
 let ready_to_start = false;
 let is_key_down = false;
@@ -16,9 +12,9 @@ let getting_ready, scramble;
 let cubeDistributionChart = null;
 let solveProgressChart = null;
 
-export function renderScramble(settings){
+export async function renderScramble(settings){
     let cube_order = settings.cube_order
-    let scramble = scrambleController(cube_order);
+    let scramble = await scrambleController(cube_order);
     rubik_scramble.textContent = scramble;
     return scramble;
 }
