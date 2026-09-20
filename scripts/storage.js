@@ -25,8 +25,8 @@ export function saveSolve(time, scramble, cubeorder, status){
 
     let id = (data.length > 0) ? data[data.length - 1].id + 1 : 1;
     let today = new Date();
-    let day = today.getDay();
-    let month = today.getMonth();
+    let day = today.getDate();
+    let month = today.getMonth() + 1;
     let year = today.getFullYear();
     const pad = (n) => n.toString().padStart(2, "0");
     let date = `${year}/${pad(month)}/${pad(day)}`

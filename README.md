@@ -8,34 +8,39 @@ A modern, lightweight Rubik's Cube timer for tracking solves, generating scrambl
 ## Features
 
 - ⏱️ Precise Rubik's Cube timer
-- 🎲 2×2 and 3×3 scramble generation
-- 📊 Solve tracking with configurable averages
+- 🎲 Scramble generation for all WCA events (2×2–7×7 + Pyraminx, Megaminx, Skewb, Square-1, Clock)
+- 📊 Solve tracking with configurable averages (Ao5, Ao12, Ao25, Ao50, Ao100)
 - 📈 Statistics and performance charts
 - 🌙 Light and dark themes
+- 💾 Automatic local storage of all solves
+- 📱 Clean, responsive and minimal UI
 
 ## Tech Stack
 
 - HTML5 + CSS3 (Design Tokens)
 - Vanilla JavaScript (ES Modules)
 - [Chart.js](https://www.chartjs.org/)
+- [cubing.js](https://js.cubing.net/cubing/)
 
 ## Getting Started
 
-Clone the repository and start a local server:
+### Requirements
+- Node.js (and npm)
 
 ```bash
 git clone https://github.com/rshd0/RubikTimer.git
 cd RubikTimer
-python -m http.server
+npm install
+npm run dev
 ```
 
-Then open [http://localhost:8000](http://localhost:8000) in your browser.
+Then open the local URL shown in the terminal (usually `http://localhost:5173`).
 
 ## Roadmap
 
 - [ ] Import / Export solves
 - [ ] Inspection time (15s WCA)
-- [ ] More cube types
+- [ ] More statistics and charts improvements
 
 ## License
 
